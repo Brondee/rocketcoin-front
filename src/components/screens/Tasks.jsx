@@ -28,21 +28,24 @@ const Tasks = () => {
                       timeMinutes,
                       description,
                       claimsAvailable,
-                      _count,
+                      taskApproves,
                     } = item;
-                    console.log(item);
-                    return (
-                      <TaskItem
-                        key={id}
-                        id={id}
-                        title={title}
-                        desc={description}
-                        time={timeMinutes}
-                        reward={tokensReward}
-                        views={_count.taskApproves}
-                        viewsTotal={claimsAvailable}
-                      />
-                    );
+                    if (claimsAvailable - taskApproves.length <= 0) {
+                      return <></>;
+                    } else {
+                      return (
+                        <TaskItem
+                          key={id}
+                          id={id}
+                          title={title}
+                          desc={description}
+                          time={timeMinutes}
+                          reward={tokensReward}
+                          views={taskApproves.length}
+                          viewsTotal={claimsAvailable}
+                        />
+                      );
+                    }
                   })}
                   {data?.length === 0 && <h3>Заданий пока что нет</h3>}
                 </div>

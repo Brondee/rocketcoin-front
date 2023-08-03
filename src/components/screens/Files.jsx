@@ -7,6 +7,7 @@ import FileItem from "../shared/FileItem";
 
 const Files = () => {
   const { data } = useGetFilesQuery();
+  console.log(data);
 
   return (
     <main>
@@ -29,19 +30,24 @@ const Files = () => {
                     expReward,
                     timeToComplete,
                     interval,
+                    approves,
                   } = item;
-                  return (
-                    <FileItem
-                      key={id}
-                      id={id}
-                      title={title}
-                      desc={description}
-                      tokens={tokensReward}
-                      exp={expReward}
-                      timeToComplete={timeToComplete}
-                      interval={interval}
-                    />
-                  );
+                  if (approves.length >= 1) {
+                    return <></>;
+                  } else {
+                    return (
+                      <FileItem
+                        key={id}
+                        id={id}
+                        title={title}
+                        desc={description}
+                        tokens={tokensReward}
+                        exp={expReward}
+                        timeToComplete={timeToComplete}
+                        interval={interval}
+                      />
+                    );
+                  }
                 })}
               </div>
             </div>

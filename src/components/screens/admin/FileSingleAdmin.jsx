@@ -8,8 +8,8 @@ import {
   useGetFileImgMutation,
 } from "../../../store/file/fileApiSlice";
 import {
-  useAddUserTokensMutation,
-  useLevelUpUserMutation,
+  useAddUserTokensDifMutation,
+  useLevelUpUserDifMutation,
 } from "../../../store/user/userApiSlice";
 import axios from "axios";
 
@@ -21,8 +21,8 @@ const FileSingleAdmin = () => {
 
   const [getFile] = useGetFileImgMutation();
   const [editFileApprove] = useEditFileApproveMutation();
-  const [addUserTokens] = useAddUserTokensMutation();
-  const [levelUpUser] = useLevelUpUserMutation();
+  const [addUserTokensDif] = useAddUserTokensDifMutation();
+  const [levelUpUserDif] = useLevelUpUserDifMutation();
   const [deleteFileApprove] = useDeleteFileApproveMutation();
   const reqUrl = process.env.REACT_APP_REQUEST_URL;
 
@@ -52,13 +52,13 @@ const FileSingleAdmin = () => {
         id: Number(window.location.href.split("/")[4]),
         isApproved: true,
       });
-      const userResp = await addUserTokens({
+      const userResp = await addUserTokensDif({
         userId: data?.userId,
         tokens: data?.file?.tokensReward,
       });
-      const expResp = await levelUpUser({
+      const expResp = await levelUpUserDif({
         userId: data?.userId,
-        exp: data?.file?.exp,
+        exp: data?.file?.expReward,
       });
       if (response.data && userResp.data && expResp.data) {
         setIsSuccess(true);
@@ -93,6 +93,7 @@ const FileSingleAdmin = () => {
   };
 
   useEffect(() => {
+    console.log(data);
     const setFilesArray = async () => {
       for (let i = 0; i < data?.files.length; i++) {
         try {

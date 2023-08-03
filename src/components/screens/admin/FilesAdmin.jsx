@@ -89,7 +89,6 @@ const FilesAdmin = () => {
               <div className="files-container">
                 {data?.map((item) => {
                   const {
-                    id,
                     title,
                     description,
                     tokensReward,
@@ -99,8 +98,8 @@ const FilesAdmin = () => {
                   } = item.file;
                   return (
                     <FileItemAdmin
-                      key={id}
-                      id={id}
+                      key={item.id}
+                      id={item.id}
                       title={title}
                       desc={description}
                       tokens={tokensReward}

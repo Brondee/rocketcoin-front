@@ -8,7 +8,7 @@ import {
   useDeleteTaskApproveMutation,
 } from "../../../store/task/taskApiSlice";
 import axios from "axios";
-import { useAddUserTokensMutation } from "../../../store/user/userApiSlice";
+import { useAddUserTokensDifMutation } from "../../../store/user/userApiSlice";
 
 const TaskSingleAdmin = () => {
   const [files, setFiles] = useState([]);
@@ -18,7 +18,7 @@ const TaskSingleAdmin = () => {
 
   const [getFile] = useGetTaskFileMutation();
   const [editApprove] = useEditApproveMutation();
-  const [addUserTokens] = useAddUserTokensMutation();
+  const [addUserTokensDif] = useAddUserTokensDifMutation();
   const [deleteTaskApprove] = useDeleteTaskApproveMutation();
   const reqUrl = process.env.REACT_APP_REQUEST_URL;
 
@@ -48,11 +48,11 @@ const TaskSingleAdmin = () => {
         id: Number(window.location.href.split("/")[4]),
         isApproved: true,
       });
-      const userResp = await addUserTokens({
+      const userResp = await addUserTokensDif({
         userId: data?.userId,
         tokens: data?.task?.tokensReward,
       });
-      if (response.data && userResp) {
+      if (response.data && userResp.data) {
         setIsSuccess(true);
         setTimeout(() => {
           window.location.href = "https://rocket-coin.online/admin_tasks";

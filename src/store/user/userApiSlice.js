@@ -19,11 +19,25 @@ export const userApiSlice = apiSlice.injectEndpoints({
         body: { ...credentials },
       }),
     }),
+    addUserTokensDif: builder.mutation({
+      query: (credentials) => ({
+        url: `/user/tokens_dif/${credentials.userId}`,
+        method: "PATCH",
+        body: { tokens: credentials.tokens },
+      }),
+    }),
     levelUpUser: builder.mutation({
       query: (credentials) => ({
         url: "/user/levelup",
         method: "PATCH",
         body: { ...credentials },
+      }),
+    }),
+    levelUpUserDif: builder.mutation({
+      query: (credentials) => ({
+        url: `/user/levelup_dif/${credentials.userId}`,
+        method: "PATCH",
+        body: { exp: credentials.exp },
       }),
     }),
     incrementCount: builder.mutation({
@@ -40,6 +54,8 @@ export const {
   useGetUserInfoQuery,
   useUpdateUserInfoMutation,
   useAddUserTokensMutation,
+  useAddUserTokensDifMutation,
   useLevelUpUserMutation,
+  useLevelUpUserDifMutation,
   useIncrementCountMutation,
 } = userApiSlice;
