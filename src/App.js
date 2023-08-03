@@ -1,24 +1,73 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/screens/Home";
+import Profile from "./components/screens/Profile";
+import Referrals from "./components/screens/Referrals";
+import Logout from "./components/screens/Logout";
+import Bonus from "./components/screens/Bonus";
+import Levels from "./components/screens/Levels";
+import Leaders from "./components/screens/Leaders";
+import Offers from "./components/screens/Offers";
+import Adgem from "./components/screens/applications/Adgem";
+import Offeroc from "./components/screens/applications/Offeroc";
+import Wannads from "./components/screens/applications/Wannads";
+import Cpx from "./components/screens/applications/Cpx";
+import OffersAll from "./components/screens/applications/Offersall";
+import Bitcotasks from "./components/screens/applications/Bitcotasks";
+import Offerscrypto from "./components/screens/applications/Offerscrypto";
+import Links from "./components/screens/Links";
+import LinksApprove from "./components/screens/LinksApprove";
+import Faucet from "./components/screens/Faucet";
+import Withdraw from "./components/screens/Withdraw";
+import Challenge from "./components/screens/Challenge";
+import Tasks from "./components/screens/Tasks";
+import AdminTasks from "./components/screens/admin/AdminTasks";
+import PtcAdmin from "./components/screens/admin/PtcAdmin";
+import TaskSingle from "./components/screens/TaskSingle";
+import TaskSingleAdmin from "./components/screens/admin/TaskSingleAdmin";
+import Ptc from "./components/screens/Ptc";
+import PtcIframe from "./components/screens/PtcIframe";
+import Files from "./components/screens/Files";
+import Ad from "./components/screens/Ad";
+import FilesAdmin from "./components/screens/admin/FilesAdmin";
+import FileSingle from "./components/shared/FileSingle";
+import FileSingleAdmin from "./components/screens/admin/FileSingleAdmin";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/ad" element={<Ad />} />
+      <Route path="/files_single_admin/:id" element={<FileSingleAdmin />} />
+      <Route path="/files_single/:id" element={<FileSingle />} />
+      <Route path="/admin_files" element={<FilesAdmin />} />
+      <Route path="/files" element={<Files />} />
+      <Route path="/ptciframe/:id/:time" element={<PtcIframe />} />
+      <Route path="/task_approve/:id" element={<TaskSingleAdmin />} />
+      <Route path="/tasks_single/:id" element={<TaskSingle />} />
+      <Route path="/admin_tasks" element={<AdminTasks />} />
+      <Route path="/admin_ptc" element={<PtcAdmin />} />
+      <Route path="/ptc" element={<Ptc />} />
+      <Route path="/tasks" element={<Tasks />} />
+      <Route path="/challenge" element={<Challenge />} />
+      <Route path="/withdraw" element={<Withdraw />} />
+      <Route path="/faucet" element={<Faucet />} />
+      <Route path="/linksapprove" element={<LinksApprove />} />
+      <Route path="/links" element={<Links />} />
+      <Route path="/offerscrypto" element={<Offerscrypto />} />
+      <Route path="/bitcotasks" element={<Bitcotasks />} />
+      <Route path="/offersall" element={<OffersAll />} />
+      <Route path="/cpx" element={<Cpx />} />
+      <Route path="/wannads" element={<Wannads />} />
+      <Route path="/offeroc" element={<Offeroc />} />
+      <Route path="/adgem" element={<Adgem />} />
+      <Route path="/offers" element={<Offers />} />
+      <Route path="/leaders" element={<Leaders />} />
+      <Route path="/levels" element={<Levels />} />
+      <Route path="/bonus" element={<Bonus />} />
+      <Route path="/referrals" element={<Referrals />} />
+      <Route path="/logout" element={<Logout />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route index element={<Home />} />
+    </Routes>
   );
 }
 
