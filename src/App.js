@@ -31,10 +31,16 @@ import Ad from "./components/screens/Ad";
 import FilesAdmin from "./components/screens/admin/FilesAdmin";
 import FileSingle from "./components/shared/FileSingle";
 import FileSingleAdmin from "./components/screens/admin/FileSingleAdmin";
+import Blog from "./components/screens/Blog";
+import BlogPage from "./components/screens/BlogPage";
+import BlogAdmin from "./components/screens/admin/BlogAdmin";
 
 function App() {
   return (
     <Routes>
+      <Route path="/blog-page/:id" element={<BlogPage />} />
+      <Route path="/admin_article" element={<BlogAdmin />} />
+      <Route path="/blog" element={<Blog />} />
       <Route path="/ad" element={<Ad />} />
       <Route path="/files_single_admin/:id" element={<FileSingleAdmin />} />
       <Route path="/files_single/:id" element={<FileSingle />} />

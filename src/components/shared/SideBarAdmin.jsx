@@ -6,6 +6,7 @@ import todoLine from "../../assets/img-icons-lk/todo-line.svg";
 import cardSend from "../../assets/img-icons-lk/card-send.svg";
 import vectorLine from "../../assets/img-icons-lk/Vector.svg";
 import archiveLine from "../../assets/img-icons-lk/archive-line.svg";
+import gitCommitsLine from "../../assets/img-icons-lk/git-repository-commits-line.svg";
 
 const SideBarAdmin = () => {
   return (
@@ -26,6 +27,10 @@ const SideBarAdmin = () => {
         <li>
           <img src={archiveLine} alt="" />
           <Link to="/admin_files">Файлы</Link>
+        </li>
+        <li>
+          <img src={gitCommitsLine} alt="" />
+          <Link to="/admin_article">Статьи</Link>
         </li>
         <li>
           <img src={cardSend} alt="" />

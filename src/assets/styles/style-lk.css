@@ -999,6 +999,12 @@
   overflow: hidden;
   border-radius: 20px 20px 0 0;
 }
+.blog-container-block-img img,
+.blog-main-block-img img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
 .blog-container-block {
   display: flex;
   flex-direction: column;

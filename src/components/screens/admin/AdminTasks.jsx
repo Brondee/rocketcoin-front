@@ -6,6 +6,7 @@ import {
   useGetApproveTasksQuery,
 } from "../../../store/task/taskApiSlice";
 import TaskItemAdmin from "../../shared/TaskItemAdmin";
+import ReactQuill from "react-quill";
 
 const AdminTasks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,6 +15,7 @@ const AdminTasks = () => {
   const [time, setTime] = useState("");
   const [tokensReward, setTokensReward] = useState("");
   const [claimsAvailable, setClaimsAvailable] = useState("");
+  const [interval, setInterval] = useState("");
   const [instruction, setInstruction] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -24,6 +26,7 @@ const AdminTasks = () => {
     time,
     tokensReward,
     claimsAvailable,
+    interval,
     instruction,
   ]);
   const { data } = getTasks();
@@ -49,6 +52,7 @@ const AdminTasks = () => {
         timeMinutes: Number(time),
         tokensReward: Number(tokensReward),
         claimsAvailable: Number(claimsAvailable),
+        interval: Number(interval),
         instruction,
       };
       const response = await addTask(addData);
@@ -184,14 +188,24 @@ const AdminTasks = () => {
                 />
               </label>
               <label>
-                Инструкция в формате html
-                <textarea
+                Интервал (чтобы задание было одноразовое введите 0 в поле
+                интервал)
+                <input
                   type="text"
-                  name="instruction"
+                  name="interval"
                   required
-                  value={instruction}
-                  onChange={(e) => setInstruction(e.target.value)}
+                  value={interval}
+                  onChange={(e) => setInterval(e.target.value)}
                   autocomplete="one-time-code"
+                />
+              </label>
+              <label className="tasks-label">
+                Инструкция
+                <ReactQuill
+                  theme="snow"
+                  value={instruction}
+                  onChange={setInstruction}
+                  style={{ width: "100%" }}
                 />
               </label>
             </div>

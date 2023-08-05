@@ -1223,6 +1223,9 @@ header {
   flex-direction: column;
   gap: 32px;
 }
+.form-article {
+  width: 100%;
+}
 .form-login h2 {
   font-style: normal;
   font-weight: 600;
@@ -2104,6 +2107,29 @@ iframe {
   transition: 0.3s;
   margin-top: 15px;
   width: fit-content;
+}
+.rich-editor {
+  border: 1px solid rgba(0, 16, 61, 0.12);
+  border-radius: 6px;
+  resize: none;
+  max-width: 100%;
+  min-height: 150px;
+}
+.rich-wrapper {
+  width: 100%;
+  max-width: 100%;
+}
+.ql-container {
+  height: 200px !important;
+}
+.tasks-label .ql-container {
+  height: 100px !important;
+}
+.ql-snow {
+  border-radius: 20px;
+}
+.full-width {
+  width: 100%;
 }
 .btn-task:hover {
   transition: 0.3s;

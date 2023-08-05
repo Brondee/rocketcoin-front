@@ -14,7 +14,6 @@ const FilesAdmin = () => {
   const [time, setTime] = useState("");
   const [tokensReward, setTokensReward] = useState("");
   const [expReward, setExpReward] = useState("");
-  const [interval, setInterval] = useState("");
   const [fileLink, setFileLink] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -24,7 +23,6 @@ const FilesAdmin = () => {
     time,
     tokensReward,
     expReward,
-    interval,
     fileLink,
   ]);
   const { data } = getData();
@@ -50,7 +48,6 @@ const FilesAdmin = () => {
         timeToComplete: Number(time),
         tokensReward: Number(tokensReward),
         expReward: Number(expReward),
-        interval: Number(interval),
         link: fileLink,
       };
       const response = await addFile(addData);
@@ -123,7 +120,7 @@ const FilesAdmin = () => {
         <div className="modal-content">
           <span className="close close2" onClick={hideModal}></span>
           <form action="#!" method="post" className="form-login">
-            <h2>Добавить задание</h2>
+            <h2>Добавить файл</h2>
             <div className="label-content-form">
               <label>
                 Название
@@ -177,17 +174,6 @@ const FilesAdmin = () => {
                   required
                   value={expReward}
                   onChange={(e) => setExpReward(e.target.value)}
-                  autocomplete="one-time-code"
-                />
-              </label>
-              <label>
-                Интервал
-                <input
-                  type="text"
-                  name="interval"
-                  required
-                  value={interval}
-                  onChange={(e) => setInterval(e.target.value)}
                   autocomplete="one-time-code"
                 />
               </label>

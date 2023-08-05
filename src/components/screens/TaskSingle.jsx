@@ -84,8 +84,8 @@ const TaskSingle = () => {
                           {data?.tokensReward} токенов
                         </a>
                         <a href="#!" className="btn-purple-task">
-                          {data?.taskApproves?.length}/{data?.claimsAvailable}{" "}
-                          views Claim
+                          {data?.claimsAvailable - data?.taskApproves?.length}/
+                          {data?.claimsAvailable} views Claim
                         </a>
                       </div>
                     </div>

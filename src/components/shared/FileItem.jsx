@@ -3,27 +3,13 @@ import React from "react";
 import transferIcon from "../../assets/transfer.svg";
 import { Link } from "react-router-dom";
 
-const FileItem = ({
-  id,
-  title,
-  desc,
-  interval,
-  timeToComplete,
-  tokens,
-  exp,
-}) => {
+const FileItem = ({ id, title, desc, timeToComplete, tokens, exp }) => {
   return (
     <div className="files-container-block">
       <div className="files-container-block-top">
         <div className="files-container-block-top-left">
           <h3>{title}</h3>
           <h4>{desc}</h4>
-        </div>
-        <div className="files-container-block-top-right">
-          <div className="challenge-lk-content-block-top-right">
-            <img src={transferIcon} alt="" />
-            <span>{interval} ч</span>
-          </div>
         </div>
       </div>
       <div className="files-container-block-buttons ">

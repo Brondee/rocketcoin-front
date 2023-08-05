@@ -29,7 +29,6 @@ const Files = () => {
                     tokensReward,
                     expReward,
                     timeToComplete,
-                    interval,
                     approves,
                   } = item;
                   if (approves.length >= 1) {
@@ -44,7 +43,6 @@ const Files = () => {
                         tokens={tokensReward}
                         exp={expReward}
                         timeToComplete={timeToComplete}
-                        interval={interval}
                       />
                     );
                   }

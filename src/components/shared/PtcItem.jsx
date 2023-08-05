@@ -70,7 +70,7 @@ const PtcItem = ({
       <div className="challenge-lk-content-block-buttons">
         {ptcType === "iframe" ? (
           <Link
-            to={`http://localhost:3000/ptciframe/${id}/${secondsWait}`}
+            to={`/ptciframe/${id}/${secondsWait}`}
             className={`btn-gray-tokens__challenge ${
               !isDisabled && "btn-challenge-active"
             } ${isDisabled && "btn-disabled"}`}
