@@ -14,9 +14,6 @@ const Challenge = () => {
     <main>
       <Layout title="Rocketcoin - Челленджи">
         <section className="content-lk">
-          <a href="#!" className="btn-open-modal-panel-lk">
-            Меню кабинета
-          </a>
           <SideBar />
           <div class="right-content-lk">
             <h1 class="title-page-lk">Челендж</h1>

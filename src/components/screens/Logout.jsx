@@ -13,8 +13,8 @@ const Logout = () => {
   const logoutFunc = useCallback(async () => {
     const { data } = await logout();
     if (data) {
-      localStorage.setItem("accessToken", null);
-      localStorage.setItem("refreshToken", null);
+      sessionStorage.setItem("accessToken", null);
+      sessionStorage.setItem("refreshToken", null);
       dispatch(logOut());
       navigate("/");
     }

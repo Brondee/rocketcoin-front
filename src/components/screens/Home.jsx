@@ -11,6 +11,7 @@ import {
 import { setCredentials } from "../../store/auth/authSlice";
 import { setModalOpen } from "../../store/generalSlice";
 import accordionArray from "../../utils/accordionArray";
+import { useParams } from "react-router-dom";
 
 import logoRocketcoin from "../../assets/logo-rocketcoin.svg";
 import offersMain1 from "../../assets/offers-main1.svg";
@@ -63,6 +64,7 @@ const Home = () => {
     isModalSingUpOpen,
     isModalResetOpen,
     isModalSentMailOpen,
+    curLang,
   } = useSelector((state) => state.general);
 
   const hideModal = () => {
@@ -174,8 +176,8 @@ const Home = () => {
             refreshToken: response.data.refresh_token,
           };
           dispatch(setCredentials(data));
-          localStorage.setItem("accessToken", response.data.access_token);
-          localStorage.setItem("refreshToken", response.data.refresh_token);
+          sessionStorage.setItem("accessToken", response.data.access_token);
+          sessionStorage.setItem("refreshToken", response.data.refresh_token);
           navigate("/profile");
           window.location.reload();
           dispatch(setModalOpen({ type: "signin", status: false }));
@@ -225,8 +227,8 @@ const Home = () => {
             refreshToken: response.data.refresh_token,
           };
           dispatch(setCredentials(data));
-          localStorage.setItem("accessToken", response.data.access_token);
-          localStorage.setItem("refreshToken", response.data.refresh_token);
+          sessionStorage.setItem("accessToken", response.data.access_token);
+          sessionStorage.setItem("refreshToken", response.data.refresh_token);
 
           navigate("/profile");
           window.location.reload();
@@ -263,6 +265,8 @@ const Home = () => {
     }
   };
 
+  const { code } = useParams();
+
   const singupFunc = async (e) => {
     e.preventDefault();
     setNameError(false);
@@ -278,15 +282,7 @@ const Home = () => {
       setLoginError(true);
     } else if (email.length === 0) {
       setEmailError(true);
-    } else if (
-      password.length < 8 ||
-      (!password.includes("!") &&
-        !password.includes("$") &&
-        !password.includes("#") &&
-        !password.includes("%")) ||
-      !/\d+/g.test(password) ||
-      /^[A-Z]/.test(password)
-    ) {
+    } else if (password.length < 10 || /^[A-Z]/.test(password)) {
       setPasswordError(true);
       console.log("password error");
     } else if (password !== passwordSecond) {
@@ -303,6 +299,7 @@ const Home = () => {
           login: userLogin,
           name,
           password,
+          promocode: code ? code : "",
         });
         if (response.error || !response.data) {
           const errMessage = response.error.data.message;
@@ -323,8 +320,8 @@ const Home = () => {
           dispatch(setCredentials(data));
           navigate("/profile");
           window.location.reload();
-          localStorage.setItem("accessToken", response.data.access_token);
-          localStorage.setItem("refreshToken", response.data.refresh_token);
+          sessionStorage.setItem("accessToken", response.data.access_token);
+          sessionStorage.setItem("refreshToken", response.data.refresh_token);
           dispatch(setModalOpen({ type: "signup", status: false }));
         }
       } catch (err) {
@@ -332,6 +329,8 @@ const Home = () => {
       }
     }
   };
+
+  console.log(window.location.href.split("?code=")[1]);
 
   return (
     <div>
@@ -352,12 +351,11 @@ const Home = () => {
                         <img src={offersMain1} alt="" />
                       </div>
                       <div className="offers-main-container-block-text">
-                        <h3>Рекламодателям</h3>
+                        <h3>
+                          {curLang === "en" ? "ADVERTISERS" : "Рекламодателям"}
+                        </h3>
                         <p>
-                          Staking is a method of verifying and securing
-                          transactions on proof of stake blockchains. It’s
-                          faster and more energy efficient than other methods
-                          such as proof of work.
+                          CPC starts from 2 Satoshis,Target REAL bitcoin users.
                         </p>
                       </div>
                     </div>
@@ -366,19 +364,17 @@ const Home = () => {
                         <img src={offersMain2} alt="" />
                       </div>
                       <div className="offers-main-container-block-text">
-                        <h3>Заработок</h3>
+                        <h3>{curLang === "en" ? "EARNERS" : "Заработок"}</h3>
                         <p>
-                          Staking is a method of verifying and securing
-                          transactions on proof of stake blockchains. It’s
-                          faster and more energy efficient than other methods
-                          such as proof of work.
+                          2,5 satoshi evert 5 mins, Affiliate program: 50% from
+                          you referrals.
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
                 <a href="#!" className="learn-more-btn">
-                  Узнать больше
+                  {curLang === "en" ? "More" : "Узнать больше"}
                 </a>
               </div>
               <div className="main-section-container-right__main">
@@ -387,7 +383,9 @@ const Home = () => {
                 <img src="img/mini=coin.png" alt="" className="mini-coin" />
                 <div className="block-sign-in-main">
                   <form>
-                    <h4>Авторизация</h4>
+                    <h4>
+                      {curLang === "en" ? "Authorization" : "Авторизация"}
+                    </h4>
                     <div className="block-sign-in-main-input">
                       <p className={`${emailHomeError && "label-error"}`}>
                         Email
@@ -404,7 +402,7 @@ const Home = () => {
                     </div>
                     <div className="block-sign-in-main-input">
                       <p className={`${passwordHomeError && "label-error"}`}>
-                        Пароль
+                        {curLang === "en" ? "Password" : "Пароль"}
                       </p>
                       <input
                         type="password"
@@ -416,11 +414,17 @@ const Home = () => {
                         className={`${passwordHomeError && "inp-error"}`}
                       />
                       {crIncorrectHome && (
-                        <p className="label-error">Email либо пароль неверны</p>
+                        <p className="label-error">
+                          {curLang === "en"
+                            ? "Email or password is incorrect"
+                            : "Email либо пароль неверны"}
+                        </p>
                       )}
                       {cantFindUserHome && (
                         <p className="label-error">
-                          Аккаунта с данным Email не существует
+                          {curLang === "en"
+                            ? "There is no account with this Email"
+                            : "Аккаунта с данным Email не существует"}
                         </p>
                       )}
                     </div>
@@ -429,13 +433,13 @@ const Home = () => {
                       type="submit"
                       onClick={(e) => loginHomeFunc(e)}
                     >
-                      Войти
+                      {curLang === "en" ? "Log in" : "Войти"}
                     </button>
                     <button
                       className="btn-submit-main2"
                       onClick={(e) => showSignupModal(e)}
                     >
-                      Зарегистрироваться
+                      {curLang === "en" ? "Register" : "Зарегистрироваться"}
                     </button>
                   </form>
                 </div>
@@ -461,11 +465,15 @@ const Home = () => {
                   </svg>
                 </div>
                 <p className="main-section-bottom-left__main-p">
-                  Листайте вниз
+                  {curLang === "en" ? "Scroll down" : "Листайте вниз"}
                 </p>
               </a>
               <div className="main-section-bottom-right__main">
-                <p>Наши социальные сети</p>
+                <p>
+                  {curLang === "en"
+                    ? "Social networks"
+                    : "Наши социальные сети"}
+                </p>
                 <div className="social-media-main">
                   <a href="#!" className="social-media-main-ellipse">
                     <img src={social1} alt="" className="social-usually" />
@@ -506,7 +514,7 @@ const Home = () => {
                       <img src={bitcoinRefresh} alt="" />
                     </div>
                   </div>
-                  <p>Faucet</p>
+                  <p>Faucet every 5 min</p>
                 </div>
                 <div className="why-are-we-section-container-right-block">
                   <div className="why-are-we-section-container-right-block-img-parent">
@@ -514,7 +522,7 @@ const Home = () => {
                       <img src={bitcoinRefresh} alt="" />
                     </div>
                   </div>
-                  <p>Faucet</p>
+                  <p>Affiliate program: 50%</p>
                 </div>
                 <div className="why-are-we-section-container-right-block">
                   <div className="why-are-we-section-container-right-block-img-parent">
@@ -522,7 +530,7 @@ const Home = () => {
                       <img src={bitcoinRefresh} alt="" />
                     </div>
                   </div>
-                  <p>Faucet</p>
+                  <p>Tons of Ptc</p>
                 </div>
                 <div className="why-are-we-section-container-right-block">
                   <div className="why-are-we-section-container-right-block-img-parent">
@@ -530,7 +538,7 @@ const Home = () => {
                       <img src={bitcoinRefresh} alt="" />
                     </div>
                   </div>
-                  <p>Faucet</p>
+                  <p>Level System</p>
                 </div>
                 <div className="why-are-we-section-container-right-block">
                   <div className="why-are-we-section-container-right-block-img-parent">
@@ -538,7 +546,7 @@ const Home = () => {
                       <img src={bitcoinRefresh} alt="" />
                     </div>
                   </div>
-                  <p>Faucet</p>
+                  <p>Daily Bonus</p>
                 </div>
                 <div className="why-are-we-section-container-right-block">
                   <div className="why-are-we-section-container-right-block-img-parent">
@@ -546,39 +554,7 @@ const Home = () => {
                       <img src={bitcoinRefresh} alt="" />
                     </div>
                   </div>
-                  <p>Faucet</p>
-                </div>
-                <div className="why-are-we-section-container-right-block">
-                  <div className="why-are-we-section-container-right-block-img-parent">
-                    <div className="why-are-we-section-container-right-block-img">
-                      <img src={bitcoinRefresh} alt="" />
-                    </div>
-                  </div>
-                  <p>Faucet</p>
-                </div>
-                <div className="why-are-we-section-container-right-block">
-                  <div className="why-are-we-section-container-right-block-img-parent">
-                    <div className="why-are-we-section-container-right-block-img">
-                      <img src={bitcoinRefresh} alt="" />
-                    </div>
-                  </div>
-                  <p>Faucet</p>
-                </div>
-                <div className="why-are-we-section-container-right-block">
-                  <div className="why-are-we-section-container-right-block-img-parent">
-                    <div className="why-are-we-section-container-right-block-img">
-                      <img src={bitcoinRefresh} alt="" />
-                    </div>
-                  </div>
-                  <p>Faucet</p>
-                </div>
-                <div className="why-are-we-section-container-right-block">
-                  <div className="why-are-we-section-container-right-block-img-parent">
-                    <div className="why-are-we-section-container-right-block-img">
-                      <img src={bitcoinRefresh} alt="" />
-                    </div>
-                  </div>
-                  <p>Faucet</p>
+                  <p>Special Tasks</p>
                 </div>
               </div>
             </div>
@@ -601,7 +577,7 @@ const Home = () => {
                 </div>
                 <div className="map-section-block-text__main">
                   <h3>4192</h3>
-                  <p>Active uesers</p>
+                  <p>Days online</p>
                 </div>
               </div>
               <div className="map-section-block__main">
@@ -610,7 +586,7 @@ const Home = () => {
                 </div>
                 <div className="map-section-block-text__main">
                   <h3>4192</h3>
-                  <p>Active uesers</p>
+                  <p>Total users</p>
                 </div>
               </div>
               <div className="map-section-block__main">
@@ -619,7 +595,7 @@ const Home = () => {
                 </div>
                 <div className="map-section-block-text__main">
                   <h3>4192</h3>
-                  <p>Active uesers</p>
+                  <p>Faucet Claims</p>
                 </div>
               </div>
               <div className="map-section-block__main">
@@ -706,8 +682,16 @@ const Home = () => {
               <div className="faq-section-container-left">
                 <h3>FAQ</h3>
                 <p>
-                  Найдите ответы, на <br />
-                  интересующие вопросы
+                  {curLang === "en" ? (
+                    <>
+                      Find answers <br />
+                      to your questions
+                    </>
+                  ) : (
+                    <>
+                      Найдите ответы, <br /> на интересующие вопросы
+                    </>
+                  )}
                 </p>
               </div>
               <div className="faq-section-container-right">
@@ -729,7 +713,7 @@ const Home = () => {
         <div className="modal-content">
           <span className="close close1" onClick={hideModal}></span>
           <form action="#!" method="post" className="form-login">
-            <h2>Авторизация</h2>
+            <h2> {curLang === "en" ? "Authorization" : "Авторизация"}</h2>
             <div className="label-content-form">
               <label className={`${emailError && "label-error"}`}>
                 Email
@@ -744,7 +728,7 @@ const Home = () => {
                 />
               </label>
               <label className={`${passwordError && "label-error"}`}>
-                Password
+                {curLang === "en" ? "Password " : "Пароль"}
                 <input
                   type="password"
                   name="password-login"
@@ -755,25 +739,32 @@ const Home = () => {
                   className={`${passwordError && "inp-error"}`}
                 />
                 <a href="#!" onClick={(e) => showResetModal(e)}>
-                  {" "}
-                  Восстановить пароль{" "}
+                  {curLang === "en"
+                    ? "Password recovery"
+                    : "Восстановить пароль"}
                 </a>
                 {cantFindUser && (
                   <p className="label-error">
-                    Аккаунта с данным Email не существует
+                    {curLang === "en"
+                      ? "There is no account with this Email"
+                      : "Аккаунта с данным Email не существует"}
                   </p>
                 )}
                 {crIncorrect && (
-                  <p className="label-error">Email либо пароль неверны</p>
+                  <p className="label-error">
+                    {curLang === "en"
+                      ? "Email or password is incorrect"
+                      : "Email либо пароль неверны"}
+                  </p>
                 )}
               </label>
             </div>
             <div className="btn-content-form-login">
               <button type="submit" onClick={(e) => loginFunc(e)}>
-                Войти
+                {curLang === "en" ? "Log in" : "Войти"}
               </button>
               <a href="#!" onClick={(e) => showSignupModal(e)}>
-                Зарегистрироваться
+                {curLang === "en" ? "Register" : "Зарегистрироваться"}
               </a>
             </div>
           </form>
@@ -790,7 +781,7 @@ const Home = () => {
             <h2>Регистрация</h2>
             <div className="label-content-form">
               <label className={`${nameError && "label-error"}`}>
-                Имя
+                {curLang === "en" ? "Name" : "Имя"}
                 <input
                   type="text"
                   name="name-reg"
@@ -802,7 +793,7 @@ const Home = () => {
                 />
               </label>
               <label className={`${loginError && "label-error"}`}>
-                Логин
+                {curLang === "en" ? "Login" : "Логин"}
                 <input
                   type="text"
                   name="login-reg"
@@ -836,7 +827,7 @@ const Home = () => {
                 )}
               </label>
               <label className={`${passwordError && "label-error"}`}>
-                Пароль
+                {curLang === "en" ? "Password" : "Пароль"}
                 <input
                   type="password"
                   name="password-reg"
@@ -851,12 +842,15 @@ const Home = () => {
                     passwordError && "label-error"
                   }`}
                 >
-                  Пароль должен содержать не менее 8 символов, латиницу, цифры,
-                  один из символов (!$#%)
+                  {curLang === "en"
+                    ? "Password must be at least 10 characters long"
+                    : " Пароль должен содержать не менее 10 символов, латиницу"}
                 </p>
               </label>
               <label className={`${pwdNotMatch && "label-error"}`}>
-                Подтверждение пароля
+                {curLang === "en"
+                  ? "Password Confirmation"
+                  : "Подтверждение пароля"}
                 <input
                   type="password"
                   name="password-reg"
@@ -867,7 +861,11 @@ const Home = () => {
                   autocomplete="one-time-code"
                 />
                 {pwdNotMatch && (
-                  <span className="label-error">Пароли не совпадают</span>
+                  <span className="label-error">
+                    {curLang === "en"
+                      ? "Passwords dont match"
+                      : " Пароли не совпадают"}
+                  </span>
                 )}
                 <div className="checkbox">
                   <label className="custom-checkbox">
@@ -881,13 +879,17 @@ const Home = () => {
                       onClick={onChangeTick}
                     />
                     <span className={`${tickError && "label-error"}`}>
-                      Согласен с Privacy policy
+                      {curLang === "en"
+                        ? "Agree with Privacy policy"
+                        : "Согласен с Privacy policy"}
                     </span>
                   </label>
                 </div>
                 {tickError && (
                   <span className="label-error">
-                    Подтвердите согласие с Privacy policy
+                    {curLang === "en"
+                      ? "You must agree with Privacy policy"
+                      : "Подтвердите согласие с Privacy policy"}
                   </span>
                 )}
               </label>
@@ -895,11 +897,13 @@ const Home = () => {
 
             <div className="btn-content-form-login">
               <button type="submit" onClick={(e) => singupFunc(e)}>
-                Зарегистрироваться
+                {curLang === "en" ? "Register" : "Зарегистрироваться"}
               </button>
 
               <a href="#!" onClick={(e) => showSigninModal(e)}>
-                Уже есть аккаунт
+                {curLang === "en"
+                  ? "Already have an account"
+                  : "Уже есть аккаунт"}
               </a>
             </div>
           </form>
@@ -913,9 +917,13 @@ const Home = () => {
         <div className="modal-content">
           <span className="close close3" onClick={hideModal}></span>
           <form action="#!" method="post" className="form-login">
-            <h2>Восстановление пароля</h2>
+            <h2>
+              {curLang === "en" ? "Password recovery" : "Восстановление пароля"}
+            </h2>
             <p className="password-again-text">
-              Введите email, который вы использовали при регистрации
+              {curLang === "en"
+                ? "Write down your email, which was used to register"
+                : "Введите email, который вы использовали при регистрации"}
             </p>
             <div className="label-content-form">
               <label className={`${emailError && "label-error"}`}>
@@ -931,17 +939,19 @@ const Home = () => {
                 />
                 {cantFindUser && (
                   <p className="label-error">
-                    Аккаунта с данным Email не существует
+                    {curLang === "en"
+                      ? "There is no account with this Email"
+                      : "Аккаунта с данным Email не существует"}
                   </p>
                 )}
               </label>
             </div>
             <div className="btn-content-form-login">
               <button type="submit" onClick={(e) => resetPasswordFunc(e)}>
-                Восстановить
+                {curLang === "en" ? "Recover" : "Восстановить"}
               </button>
               <a href="#!" onClick={(e) => showSigninModal(e)}>
-                Войти
+                {curLang === "en" ? "Log in" : "Войти"}
               </a>
             </div>
           </form>
@@ -956,15 +966,18 @@ const Home = () => {
           <span className="close close4" onClick={hideModal}></span>
           <form action="#!" method="post" className="form-login">
             <p className="password-again-text">
-              Вам отправлено письмо с временным паролем. Используйте его для
-              авторизаци
+              {curLang === "en"
+                ? "Mail with a new password was sent to your email. Use it to log in"
+                : "Вам отправлено письмо с временным паролем. Используйте его для авторизаци"}
             </p>
             <h2>
-              Если вы не получили письмо, пожалуйста, проверьте папку «Спам».
+              {curLang === "en"
+                ? "If you haven't received the email, please check the Spam folder."
+                : "Если вы не получили письмо, пожалуйста, проверьте папку «Спам»."}
             </h2>
             <div className="btn-content-form-login">
               <button type="submit" onClick={(e) => showSigninModal(e)}>
-                Войти
+                {curLang === "en" ? "Log in" : "Войти"}
               </button>
             </div>
           </form>

@@ -51,6 +51,7 @@ const TaskSingleAdmin = () => {
       const userResp = await addUserTokensDif({
         userId: data?.userId,
         tokens: data?.task?.tokensReward,
+        type: "tasks",
       });
       if (response.data && userResp.data) {
         setIsSuccess(true);
@@ -132,9 +133,6 @@ const TaskSingleAdmin = () => {
                         <a href="#!" className="btn-green-task">
                           {data?.task?.tokensReward} токенов
                         </a>
-                        <a href="#!" className="btn-purple-task">
-                          7/{data?.task?.claimsAvailable} views Claim
-                        </a>
                       </div>
                     </div>
                     <p className="text-task-block">{data?.task?.description}</p>
@@ -149,6 +147,10 @@ const TaskSingleAdmin = () => {
                     <div className="title-task-and-star">
                       <h3 className="instr-title">Доказательста:</h3>
                     </div>
+
+                    <p className="proof-textarea-text">
+                      Дополнительная информация: {data?.dopInfo}
+                    </p>
                     {isSuccess ? (
                       <h3 className="dropzone-success-title">Успешно!</h3>
                     ) : (

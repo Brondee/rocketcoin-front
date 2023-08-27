@@ -9,9 +9,6 @@ const Withdraw = () => {
     <main>
       <Layout title="Rocketcoin - Вывод">
         <section className="content-lk">
-          <a href="#!" className="btn-open-modal-panel-lk">
-            Меню кабинета
-          </a>
           <SideBar />
           <div class="right-content-lk">
             <h1 class="title-page-lk">Вывод</h1>

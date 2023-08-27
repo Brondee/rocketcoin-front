@@ -126,20 +126,17 @@ const Ad = () => {
     <main>
       <Layout title="Rocketcoin - Реклама">
         <section className="content-lk">
-          <a href="#!" className="btn-open-modal-panel-lk">
-            Меню кабинета
-          </a>
           <SideBar />
           <div class="right-content-lk">
             <h1 class="title-page-lk">Реклама</h1>
             <div class="wrapper-page-lk">
-              <div class="advertising-container">
-                <div class="advertising-container-block">
-                  <div class="advertising-container-block-top">
+              <div class="promotion-container">
+                <div class="promotion-container-block">
+                  <div class="promotion-container-block-top">
                     Купите токены для вашей рекламы
                   </div>
-                  <div class="advertising-container-block-content">
-                    <div class="advertising-container-block-input">
+                  <div class="promotion-container-block-content">
+                    <div class="promotion-container-block-input">
                       <input
                         type="text"
                         placeholder="10"
@@ -148,7 +145,7 @@ const Ad = () => {
                       />
                       <button type="button">{depositConverted} токенов</button>
                     </div>
-                    <div class="advertising-container-block-select">
+                    <div class="promotion-container-block-select">
                       <select>
                         <option>FaucetPay</option>
                       </select>
@@ -159,11 +156,11 @@ const Ad = () => {
                     </button>
                   </div>
                 </div>
-                <div class="advertising-container-block">
-                  <div class="advertising-container-block-top">
+                <div class="promotion-container-block">
+                  <div class="promotion-container-block-top">
                     Разместите рекламу
                   </div>
-                  <div class="advertising-container-block-content-form">
+                  <div class="promotion-container-block-content-form">
                     <div class="form-input-block">
                       <p>Заголовок</p>
                       <input
@@ -349,7 +346,7 @@ const Ad = () => {
                       <p className="ad-total">Итого: {finalPrice} токенов</p>
                     </div>
                     <button
-                      class="buy-advertising"
+                      class="buy-promotion"
                       type="button"
                       onClick={submitAd}
                     >

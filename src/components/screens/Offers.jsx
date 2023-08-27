@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import StarsContainer from "../ui/StarsContainer";
 import { useGetRatingInfoQuery } from "../../store/rating/ratingApiSlice";
 import { useGetUserInfoQuery } from "../../store/user/userApiSlice";
+import { useSelector } from "react-redux";
 
 const Offers = () => {
   const response = useGetUserInfoQuery();
@@ -24,6 +25,7 @@ const Offers = () => {
     useState(true);
 
   const { data } = useGetRatingInfoQuery();
+  const { curLang } = useSelector((state) => state.general);
 
   useEffect(() => {
     for (let i = 0; i < data?.length; i++) {
@@ -63,14 +65,15 @@ const Offers = () => {
 
   return (
     <main>
-      <Layout title="Rocketcoin - Офферы">
+      <Layout
+        title={`Rocketcoin - ${curLang === "en" ? "Offerwall" : "Офферы"}`}
+      >
         <section className="content-lk">
-          <a href="#!" className="btn-open-modal-panel-lk">
-            Меню кабинета
-          </a>
           <SideBar />
           <div className="right-content-lk">
-            <h1 className="title-page-lk">Офферы</h1>
+            <h1 className="title-page-lk">
+              {curLang === "en" ? "Offerwall" : "Офферы"}
+            </h1>
             <div className="wrapper-page-lk">
               <div className="content-block-flex-lk-white">
                 <div className="task-offers-content">
@@ -85,7 +88,7 @@ const Offers = () => {
                       />
                     </div>
                     <Link to="/wannads" className="btn-task">
-                      Посетить сайт
+                      {curLang === "en" ? "Visit" : "Посетить сайт"}
                     </Link>
                   </div>
                   <div className="task-offers">
@@ -99,7 +102,7 @@ const Offers = () => {
                       />
                     </div>
                     <Link to="/offeroc" className="btn-task">
-                      Посетить сайт
+                      {curLang === "en" ? "Visit" : "Посетить сайт"}
                     </Link>
                   </div>
                   <div className="task-offers">
@@ -113,7 +116,7 @@ const Offers = () => {
                       />
                     </div>
                     <Link to="/Cpx" className="btn-task">
-                      Посетить сайт
+                      {curLang === "en" ? "Visit" : "Посетить сайт"}
                     </Link>
                   </div>
                   <div className="task-offers">
@@ -127,7 +130,7 @@ const Offers = () => {
                       />
                     </div>
                     <Link to="/offersall" className="btn-task">
-                      Посетить сайт
+                      {curLang === "en" ? "Visit" : "Посетить сайт"}
                     </Link>
                   </div>
                   <div className="task-offers">
@@ -141,7 +144,7 @@ const Offers = () => {
                       />
                     </div>
                     <Link to="/bitcotasks" className="btn-task">
-                      Посетить сайт
+                      {curLang === "en" ? "Visit" : "Посетить сайт"}
                     </Link>
                   </div>
 
@@ -156,7 +159,7 @@ const Offers = () => {
                       />
                     </div>
                     <Link to="/offerscrypto" className="btn-task">
-                      Посетить сайт
+                      {curLang === "en" ? "Visit" : "Посетить сайт"}
                     </Link>
                   </div>
                 </div>

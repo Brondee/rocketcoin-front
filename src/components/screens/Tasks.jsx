@@ -3,20 +3,22 @@ import Layout from "../layout/Layout";
 import SideBar from "../shared/SideBar";
 import { useGetTasksQuery } from "../../store/task/taskApiSlice";
 import TaskItem from "../shared/TaskItem";
+import { useSelector } from "react-redux";
 
 const Tasks = () => {
   const { data } = useGetTasksQuery();
 
+  const { curLang } = useSelector((state) => state.general);
+
   return (
     <main>
-      <Layout title="Rocketcoin - Задания">
+      <Layout title={`Rocketcoin - ${curLang === "en" ? "Tasks" : "Задания"}`}>
         <section className="content-lk">
-          <a href="#!" className="btn-open-modal-panel-lk">
-            Меню кабинета
-          </a>
           <SideBar />
           <div className="right-content-lk">
-            <h1 className="title-page-lk">Задания</h1>
+            <h1 className="title-page-lk">
+              {curLang === "en" ? "Tasks" : "Задания"}
+            </h1>
             <div className="wrapper-page-lk">
               <div className="content-block-flex-lk-white">
                 <div className="task-offers-content">
@@ -27,7 +29,6 @@ const Tasks = () => {
                       tokensReward,
                       timeMinutes,
                       description,
-                      claimsAvailable,
                       taskApproves,
                       interval,
                     } = item;
@@ -40,7 +41,6 @@ const Tasks = () => {
                         time={timeMinutes}
                         reward={tokensReward}
                         approves={taskApproves}
-                        viewsTotal={claimsAvailable}
                         interval={interval}
                       />
                     );

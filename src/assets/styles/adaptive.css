@@ -562,6 +562,30 @@
   }
   .left-panel-info {
     display: none;
+    border: none;
+    width: 100%;
+    padding-top: 10px;
+  }
+  .left-panel-info.active {
+    display: block;
+  }
+  .left-panel-info.active:after {
+    display: none;
+  }
+  .left-panel-info ul {
+    width: 100%;
+    height: auto;
+  }
+  .left-panel-info ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+  .left-panel-info ul li a {
+    font-size: 18px;
+    min-width: 100px;
   }
   .container {
     padding-left: 10px;

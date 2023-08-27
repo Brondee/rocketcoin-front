@@ -1,6 +1,5 @@
 import React from "react";
 
-import transferIcon from "../../assets/transfer.svg";
 import { Link } from "react-router-dom";
 
 const FileItem = ({ id, title, desc, timeToComplete, tokens, exp }) => {

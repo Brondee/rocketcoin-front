@@ -3,29 +3,31 @@ import Layout from "../layout/Layout";
 import SideBar from "../shared/SideBar";
 import { useGetLeadersInfoQuery } from "../../store/leaders/leadersApiSlice";
 import LeaderItem from "../shared/LeaderItem";
+import { useSelector } from "react-redux";
 
 const Leaders = () => {
   const { data } = useGetLeadersInfoQuery();
 
+  const { curLang } = useSelector((state) => state.general);
+
   return (
     <main>
-      <Layout title="Rocketcoin - Лидеры">
+      <Layout title={`Rocketcoin - ${curLang === "en" ? "Leaders" : "Лидеры"}`}>
         <section className="content-lk">
-          <a href="#!" className="btn-open-modal-panel-lk">
-            Меню кабинета
-          </a>
           <SideBar />
           <div class="right-content-lk">
-            <h1 class="title-page-lk">Leaderboard</h1>
+            <h1 class="title-page-lk">
+              {curLang === "en" ? "Leaderboard" : "Лидеры"}
+            </h1>
             <div class="wrapper-page-lk wrapper-page-lk-leaderboard">
               <div class="leaderboard-container">
                 <div class="leaderboard-container-block">
                   <h2>PTC</h2>
                   <div class="leaderboard-container-block-table">
                     <div class="leaderboard-container-block-table-top">
-                      <p>Логин</p>
-                      <p>Собранно</p>
-                      <p>Награда</p>
+                      <p>{curLang === "en" ? "Login" : "Логин"} </p>
+                      <p>{curLang === "en" ? "Earned" : "Собрано"}</p>
+                      <p>{curLang === "en" ? "Reward" : "Награда"}</p>
                     </div>
                     {data?.ptcLeaders?.map((leader, index) => {
                       const { id, name, ptcMonthCount } = leader;
@@ -46,9 +48,9 @@ const Leaders = () => {
                   <h2>Shortlinsks</h2>
                   <div class="leaderboard-container-block-table">
                     <div class="leaderboard-container-block-table-top">
-                      <p>Логин</p>
-                      <p>Собранно</p>
-                      <p>Награда</p>
+                      <p>{curLang === "en" ? "Login" : "Логин"}</p>
+                      <p>{curLang === "en" ? "Earned" : "Собрано"}</p>
+                      <p>{curLang === "en" ? "Reward" : "Награда"}</p>
                     </div>
                     {data?.linksLeaders?.map((leader, index) => {
                       const { id, name, linksMonthCount } = leader;
@@ -69,9 +71,9 @@ const Leaders = () => {
                   <h2>Faucet claims</h2>
                   <div class="leaderboard-container-block-table">
                     <div class="leaderboard-container-block-table-top">
-                      <p>Логин</p>
-                      <p>Собранно</p>
-                      <p>Награда</p>
+                      <p>{curLang === "en" ? "Login" : "Логин"}</p>
+                      <p>{curLang === "en" ? "Earned" : "Собрано"}</p>
+                      <p>{curLang === "en" ? "Reward" : "Награда"}</p>
                     </div>
                     {data?.faucetLeaders?.map((leader, index) => {
                       const { id, name, faucetMonthCount } = leader;
@@ -92,9 +94,9 @@ const Leaders = () => {
                   <h2>Offerwall</h2>
                   <div class="leaderboard-container-block-table">
                     <div class="leaderboard-container-block-table-top">
-                      <p>Логин</p>
-                      <p>Собранно</p>
-                      <p>Награда</p>
+                      <p>{curLang === "en" ? "Login" : "Логин"}</p>
+                      <p>{curLang === "en" ? "Earned" : "Собрано"}</p>
+                      <p>{curLang === "en" ? "Reward" : "Награда"}</p>
                     </div>
                     {data?.offerwallLeaders?.map((leader, index) => {
                       const { id, name, offerwallMonthCount } = leader;
@@ -103,7 +105,7 @@ const Leaders = () => {
                           key={id}
                           name={name}
                           amount={offerwallMonthCount}
-                          currency={""}
+                          currency={curLang === "en" ? "tokens" : "токенов"}
                           place={index}
                           rewards={[4500, 3300, 1500]}
                         />
@@ -112,12 +114,12 @@ const Leaders = () => {
                   </div>
                 </div>
                 <div class="leaderboard-container-block">
-                  <h2>Exp(опыт)</h2>
+                  <h2>{curLang === "en" ? "Exp" : "Exp(опыт)"}</h2>
                   <div class="leaderboard-container-block-table">
                     <div class="leaderboard-container-block-table-top">
-                      <p>Логин</p>
-                      <p>Собранно</p>
-                      <p>Награда</p>
+                      <p>{curLang === "en" ? "Login" : "Логин"}</p>
+                      <p>{curLang === "en" ? "Earned" : "Собрано"}</p>
+                      <p>{curLang === "en" ? "Reward" : "Награда"}</p>
                     </div>
                     {data?.expLeaders?.map((leader, index) => {
                       const { id, name, expMonthCount } = leader;

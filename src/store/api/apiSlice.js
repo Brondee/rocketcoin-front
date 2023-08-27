@@ -7,9 +7,10 @@ const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_REQUEST_URL,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
-    const token = localStorage.getItem("accessToken") || getState().auth.token;
+    const token =
+      sessionStorage.getItem("accessToken") || getState().auth.token;
     refreshTokenState =
-      localStorage.getItem("refreshToken") || getState().auth.refreshToken;
+      sessionStorage.getItem("refreshToken") || getState().auth.refreshToken;
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
@@ -28,19 +29,19 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
         email: null,
       })
     );
-    localStorage.setItem("accessToken", refreshTokenState);
+    sessionStorage.setItem("accessToken", refreshTokenState);
     const refreshRes = await baseQuery("/auth/refresh", api, extraOptions);
     if (refreshRes?.data) {
       const email = api.getState().auth.email;
 
       api.dispatch(setCredentials({ ...refreshRes.data, email }));
-      localStorage.setItem("accessToken", refreshRes.data.access_token);
-      localStorage.setItem("refreshToken", refreshRes.data.refresh_token);
+      sessionStorage.setItem("accessToken", refreshRes.data.access_token);
+      sessionStorage.setItem("refreshToken", refreshRes.data.refresh_token);
       console.log(refreshRes.data);
       result = await baseQuery(args, api, extraOptions);
     } else {
-      localStorage.setItem("accessToken", null);
-      localStorage.setItem("refreshToken", null);
+      sessionStorage.setItem("accessToken", null);
+      sessionStorage.setItem("refreshToken", null);
       api.dispatch(logOut());
     }
   }

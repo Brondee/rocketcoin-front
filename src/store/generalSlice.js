@@ -9,6 +9,9 @@ const initialState = {
   tokensPtcReward: 0,
   expPtcReward: 0,
   ptcId: 0,
+  tokensBonusReward: 0,
+  expBonusReward: 0,
+  curLang: "en",
 };
 
 const generalSlice = createSlice({
@@ -35,9 +38,17 @@ const generalSlice = createSlice({
       state.ptcId = action.payload.ptcId;
       console.log(action);
     },
+    setBonusReward: (state, action) => {
+      state.tokensBonusReward = action.payload.tokens;
+      state.expBonusReward = action.payload.exp;
+    },
+    setCurLang: (state, action) => {
+      state.curLang = action.payload;
+    },
   },
 });
 
-export const { setModalOpen, setPtcRewards } = generalSlice.actions;
+export const { setModalOpen, setPtcRewards, setBonusReward, setCurLang } =
+  generalSlice.actions;
 
 export default generalSlice.reducer;

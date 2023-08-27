@@ -1,30 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import transferIcon from "../../assets/transfer.svg";
 
-const TaskItem = ({
-  id,
-  title,
-  desc,
-  time,
-  reward,
-  approves,
-  viewsTotal,
-  interval,
-}) => {
-  const [isAvailable, setIsAvailable] = useState(true);
+const TaskItem = ({ id, title, desc, time, reward, approves, interval }) => {
+  const [isAvailable, setIsAvailable] = useState(false);
+
+  const { curLang } = useSelector((state) => state.general);
+
   useEffect(() => {
-    if (interval === 0 && viewsTotal - approves.length <= 0) {
-      setIsAvailable(false);
+    if (approves.length === 0) {
+      setIsAvailable(true);
     } else if (
-      new Date().getTime() <=
-        new Date(approves[0].sent).getTime() + 1 * interval * 60 * 60 * 1000 &&
-      viewsTotal - approves.length <= 0
+      new Date().getTime() >=
+      new Date(approves[0]?.sent).getTime() + interval * 60 * 60 * 1000
     ) {
-      setIsAvailable(false);
+      setIsAvailable(true);
     }
-  }, [interval, viewsTotal, approves]);
+  }, [interval, approves]);
   return (
     <>
       {isAvailable && (
@@ -43,17 +37,14 @@ const TaskItem = ({
           <p className="text-task-block">{desc}</p>
           <div className="btns-content-task">
             <Link to={`/tasks_single/${id}`} className="btn-task">
-              Подробнее о задании
+              {curLang === "en" ? "More" : "Подробнее о задании"}
             </Link>
             <div className="right-btns-content-task">
               <a href="#!" className="btn-time-task">
-                {time} минут
+                {time} {curLang === "en" ? "minutes" : "минут"}
               </a>
               <a href="#!" className="btn-green-task">
-                {reward} токенов
-              </a>
-              <a href="#!" className="btn-purple-task">
-                {viewsTotal - approves.length}/{viewsTotal} views Claim
+                {reward} {curLang === "en" ? "tokens" : "токенов"}
               </a>
             </div>
           </div>

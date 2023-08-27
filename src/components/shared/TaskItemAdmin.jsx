@@ -1,16 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const TaskItemAdmin = ({
-  approveId,
-  id,
-  title,
-  desc,
-  time,
-  reward,
-  views,
-  viewsTotal,
-}) => {
+const TaskItemAdmin = ({ approveId, id, title, desc, time, reward }) => {
   return (
     <div className="task-offers task-offers-2">
       <div className="title-task-and-star">
@@ -28,9 +19,6 @@ const TaskItemAdmin = ({
           </a>
           <a href="#!" className="btn-green-task">
             {reward} токенов
-          </a>
-          <a href="#!" className="btn-purple-task">
-            {views}/{viewsTotal} views Claim
           </a>
         </div>
       </div>

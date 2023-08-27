@@ -9,7 +9,7 @@ import { ReactComponent as ArrowLang } from "../../assets/img/arrow-language.svg
 import "../../assets/styles/style.css";
 import "../../assets/styles/style-lk.css";
 import "../../assets/styles/adaptive.css";
-import { setModalOpen } from "../../store/generalSlice";
+import { setCurLang, setModalOpen } from "../../store/generalSlice";
 
 const Header = () => {
   const [isLangShown, setIsLangShown] = useState(false);
@@ -18,13 +18,14 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { curLang } = useSelector((state) => state.general);
   const { token } = useSelector((state) => state.auth);
   useEffect(() => {
     setIsLoggedIn(false);
     if (
       token !== null ||
-      (localStorage.getItem("accessToken") !== null &&
-        localStorage.getItem("accessToken") !== "null")
+      (sessionStorage.getItem("accessToken") !== null &&
+        sessionStorage.getItem("accessToken") !== "null")
     ) {
       setIsLoggedIn(true);
     } else {
@@ -44,6 +45,10 @@ const Header = () => {
     }
   };
 
+  const changeLang = (lang) => {
+    dispatch(setCurLang(lang));
+  };
+
   return (
     <header>
       <div className="container">
@@ -55,17 +60,17 @@ const Header = () => {
             <ul>
               <li className="link-header-li">
                 <Link to="/about" className="link-header-a">
-                  О нас
+                  {curLang === "en" ? "About" : "О нас"}
                 </Link>
               </li>
               <li className="link-header-li">
                 <Link to="/how_works" className="link-header-a">
-                  Как это работает
+                  {curLang === "en" ? "How it works" : "Как это работает"}
                 </Link>
               </li>
               <li className="link-header-li">
                 <Link to="/where_works" className="link-header-a">
-                  Где работаем
+                  {curLang === "en" ? "Where we work" : "Где работаем"}
                 </Link>
               </li>
               <li className="link-header-li">
@@ -75,12 +80,12 @@ const Header = () => {
               </li>
               <li className="link-header-li">
                 <Link to="/blog" className="link-header-a">
-                  Блог
+                  {curLang === "en" ? "Blog" : "Блог"}
                 </Link>
               </li>
               <li className="link-header-li">
                 <Link to="/contacts" className="link-header-a">
-                  Контакты
+                  {curLang === "en" ? "Contacts" : "Контакты"}
                 </Link>
               </li>
             </ul>
@@ -92,8 +97,17 @@ const Header = () => {
                   className="dropdown-content-language"
                   style={{ pointerEvents: "none" }}
                 >
-                  <Flag1 />
-                  <p className="dropdown-content-language-p">Русский</p>
+                  {curLang === "en" ? (
+                    <>
+                      <Flag2 />
+                      <p className="dropdown-content-language-p">English</p>
+                    </>
+                  ) : (
+                    <>
+                      <Flag1 />
+                      <p className="dropdown-content-language-p">Русский</p>
+                    </>
+                  )}
                 </div>
                 <div className="arrow-lang-handler">
                   <ArrowLang className="arrow-language dropdown-content-language-img" />
@@ -103,11 +117,21 @@ const Header = () => {
                 id="myDropdown"
                 className={`dropdown-content ${isLangShown ? "show" : ""}`}
               >
-                <div className="dropdown-content-language dropdown-content-language-active">
+                <div
+                  className={`dropdown-content-language ${
+                    curLang === "ru" && "dropdown-content-language-active"
+                  }`}
+                  onClick={() => changeLang("ru")}
+                >
                   <Flag1 />
                   <p>Русский</p>
                 </div>
-                <div className="dropdown-content-language">
+                <div
+                  className={`dropdown-content-language ${
+                    curLang === "en" && "dropdown-content-language-active"
+                  }`}
+                  onClick={() => changeLang("en")}
+                >
                   <Flag2 />
                   <p>English</p>
                 </div>
@@ -119,7 +143,13 @@ const Header = () => {
               className="btn-sign-in"
               onClick={showSingInModal}
             >
-              {!isLoggedIn ? "Войти" : "Профиль"}
+              {curLang === "en"
+                ? !isLoggedIn
+                  ? "Log in"
+                  : "Account"
+                : !isLoggedIn
+                ? "Войти"
+                : "Профиль"}
             </button>
 
             <div className="hamburger-menu">
@@ -130,17 +160,17 @@ const Header = () => {
               <ul className="menu__box">
                 <li className="link-header-li">
                   <Link to="/about" className="link-header-a">
-                    О нас
+                    {curLang === "en" ? "About" : "О нас"}
                   </Link>
                 </li>
                 <li className="link-header-li">
                   <Link to="/how_works" className="link-header-a">
-                    Как это работает
+                    {curLang === "en" ? "How it works" : "Как это работает"}
                   </Link>
                 </li>
                 <li className="link-header-li">
                   <Link to="/where_works" className="link-header-a">
-                    Где работаем
+                    {curLang === "en" ? "Where we work" : "Где работаем"}
                   </Link>
                 </li>
                 <li className="link-header-li">
@@ -150,12 +180,12 @@ const Header = () => {
                 </li>
                 <li className="link-header-li">
                   <Link to="/blog" className="link-header-a">
-                    Блог
+                    {curLang === "en" ? "Blog" : "Блог"}
                   </Link>
                 </li>
                 <li className="link-header-li">
                   <Link to="/contacts" className="link-header-a">
-                    Контакты
+                    {curLang === "en" ? "Contacts" : "Контакты"}
                   </Link>
                 </li>
                 <div className="dropdown">
@@ -164,10 +194,21 @@ const Header = () => {
                       className="dropdown-content-language"
                       style={{ pointerEvents: "none" }}
                     >
-                      <Flag1 />
-                      <p className="dropdown-content-language-p dropdown-content-language-p-2">
-                        Русский
-                      </p>
+                      {curLang === "en" ? (
+                        <>
+                          <Flag2 />
+                          <p className="dropdown-content-language-p dropdown-content-language-p-2">
+                            English
+                          </p>
+                        </>
+                      ) : (
+                        <>
+                          <Flag1 />
+                          <p className="dropdown-content-language-p dropdown-content-language-p-2">
+                            Русский
+                          </p>
+                        </>
+                      )}
                     </div>
                     <ArrowLang className="arrow-language dropdown-content-language-img" />
                   </button>
@@ -175,11 +216,21 @@ const Header = () => {
                     id="myDropdown2"
                     className={`dropdown-content ${isLangShown ? "show" : ""}`}
                   >
-                    <div className="dropdown-content-language dropdown-content-language-active">
+                    <div
+                      className={`dropdown-content-language ${
+                        curLang === "ru" && "dropdown-content-language-active"
+                      }`}
+                      onClick={() => changeLang("ru")}
+                    >
                       <Flag1 />
                       <p>Русский</p>
                     </div>
-                    <div className="dropdown-content-language">
+                    <div
+                      className={`dropdown-content-language ${
+                        curLang === "en" && "dropdown-content-language-active"
+                      }`}
+                      onClick={() => changeLang("en")}
+                    >
                       <Flag2 />
                       <p>English</p>
                     </div>

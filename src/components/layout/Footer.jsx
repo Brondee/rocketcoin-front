@@ -6,8 +6,11 @@ import { ReactComponent as Social2 } from "../../assets/img/social2.svg";
 import { ReactComponent as Social2Active } from "../../assets/img/social-active2.svg";
 import { ReactComponent as Social3 } from "../../assets/img/social3.svg";
 import { ReactComponent as Social3Active } from "../../assets/img/social-active3.svg";
+import { useSelector } from "react-redux";
 
 const Footer = () => {
+  const { curLang } = useSelector((state) => state.general);
+
   return (
     <>
       <footer>
@@ -19,7 +22,9 @@ const Footer = () => {
               <a href="#!">Privacy policy</a>
             </div>
             <div className="footer-container-right">
-              <h4>Наши социальные сети</h4>
+              <h4>
+                {curLang === "en" ? "Social networks" : "Наши социальные сети"}
+              </h4>
               <div className="social-media-main">
                 <a href="#!" className="social-media-main-ellipse">
                   <Social1 className="social-usually" />

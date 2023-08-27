@@ -9,14 +9,17 @@ import {
 } from "../../store/task/taskApiSlice";
 
 import IconUpload from "../../assets/img/icons-upload.svg";
+import { useSelector } from "react-redux";
 
 const TaskSingle = () => {
   const [acceptedFiles, setAcceptedFiles] = useState([]);
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [dopInfo, setDopInfo] = useState("");
 
   const getTaskData = useCallback(useGetTaskByIdQuery, [acceptedFiles]);
   const { data } = getTaskData(Number(window.location.href.split("/")[4]));
+  const { curLang } = useSelector((state) => state.general);
 
   const [uploadFile] = useUploadFileMutation();
   const [addApproveTask] = useAddApproveTaskMutation();
@@ -26,7 +29,7 @@ const TaskSingle = () => {
 
     if (acceptedFiles.length > 0) {
       try {
-        const response = await addApproveTask(data?.id);
+        const response = await addApproveTask({ taskId: data?.id, dopInfo });
         console.log(response);
         if (response.data) {
           for (let i = 0; i < acceptedFiles.length; i++) {
@@ -62,14 +65,13 @@ const TaskSingle = () => {
 
   return (
     <main>
-      <Layout title="Rocketcoin - Задание">
+      <Layout title={`Rocketcoin - ${curLang === "en" ? "Task" : "Задание"}`}>
         <section className="content-lk">
-          <a href="#!" className="btn-open-modal-panel-lk">
-            Меню кабинета
-          </a>
           <SideBar />
           <div className="right-content-lk">
-            <h1 className="title-page-lk">Задание</h1>
+            <h1 className="title-page-lk">
+              {curLang === "en" ? "Task" : "Задание"}
+            </h1>
             <div className="wrapper-page-lk">
               <div className="content-block-flex-lk-white">
                 <div className="task-offers-content">
@@ -78,20 +80,20 @@ const TaskSingle = () => {
                       <h3>{data?.title}</h3>
                       <div className="right-btns-content-task">
                         <a href="#!" className="btn-time-task">
-                          {data?.timeMinutes} минут
+                          {data?.timeMinutes}{" "}
+                          {curLang === "en" ? "minutes" : "минут"}
                         </a>
                         <a href="#!" className="btn-green-task">
-                          {data?.tokensReward} токенов
-                        </a>
-                        <a href="#!" className="btn-purple-task">
-                          {data?.claimsAvailable - data?.taskApproves?.length}/
-                          {data?.claimsAvailable} views Claim
+                          {data?.tokensReward}{" "}
+                          {curLang === "en" ? "tokens" : "токенов"}
                         </a>
                       </div>
                     </div>
                     <p className="text-task-block">{data?.description}</p>
                     <div className="title-task-and-star">
-                      <h3 className="instr-title">Инструкция</h3>
+                      <h3 className="instr-title">
+                        {curLang === "en" ? "Instruction" : "Инструкция"}
+                      </h3>
                     </div>
                     <div
                       dangerouslySetInnerHTML={{
@@ -100,11 +102,27 @@ const TaskSingle = () => {
                     ></div>
 
                     <div className="title-task-and-star">
-                      <h3 className="instr-title">Доказательста:</h3>
+                      <h3 className="instr-title">
+                        {curLang === "en" ? "Proofs:" : "Доказательста:"}
+                      </h3>
                     </div>
+                    <textarea
+                      cols="30"
+                      rows="3"
+                      placeholder={
+                        curLang === "en"
+                          ? "Additional Information"
+                          : "Дополнительная информация"
+                      }
+                      className="proof-textarea"
+                      value={dopInfo}
+                      onChange={(e) => setDopInfo(e.target.value)}
+                    ></textarea>
                     {isSuccess ? (
                       <h3 className="dropzone-success-title">
-                        Задание успешно отправлено на проверку
+                        {curLang === "en"
+                          ? "Task was submitted for verification"
+                          : "Задание успешно отправлено на проверку"}
                       </h3>
                     ) : (
                       <>
@@ -125,10 +143,18 @@ const TaskSingle = () => {
                                 <input {...getInputProps()} />
                                 <img src={IconUpload} alt="icon upload" />
                                 <p className="dropzone-text">
-                                  Перетащите файл в эту область, чтобы загрузить
+                                  {curLang === "en"
+                                    ? "Drag and drop files to upload"
+                                    : "Перетащите файл в эту область, чтобы загрузить"}
                                 </p>
-                                <p className="dropzone-space">или</p>
-                                <p className="dropzone-btn">Выберите файл</p>
+                                <p className="dropzone-space">
+                                  {curLang === "en" ? "or" : "или"}
+                                </p>
+                                <p className="dropzone-btn">
+                                  {curLang === "en"
+                                    ? "Choose file"
+                                    : "Выберите файл"}
+                                </p>
                               </div>
                             </section>
                           )}
@@ -136,7 +162,9 @@ const TaskSingle = () => {
 
                         <div>
                           <h3 className="accepted-files-title">
-                            Выбранные файлы:
+                            {curLang === "en"
+                              ? "Choosen files:"
+                              : "Выбранные файлы:"}
                           </h3>
                           {acceptedFiles.map((item) => {
                             console.log(item);
@@ -153,7 +181,9 @@ const TaskSingle = () => {
                         class="btn-task"
                         onClick={(e) => sendToReview(e)}
                       >
-                        Отправить на проверку
+                        {curLang === "en"
+                          ? "Submit for verification"
+                          : "Отправить на проверку"}
                       </a>
                     </div>
                   </div>

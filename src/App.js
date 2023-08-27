@@ -34,6 +34,8 @@ import FileSingleAdmin from "./components/screens/admin/FileSingleAdmin";
 import Blog from "./components/screens/Blog";
 import BlogPage from "./components/screens/BlogPage";
 import BlogAdmin from "./components/screens/admin/BlogAdmin";
+import Clix from "./components/screens/applications/Clix";
+import FaucetClaim from "./components/screens/FaucetClaim";
 
 function App() {
   return (
@@ -55,9 +57,11 @@ function App() {
       <Route path="/tasks" element={<Tasks />} />
       <Route path="/challenge" element={<Challenge />} />
       <Route path="/withdraw" element={<Withdraw />} />
+      <Route path="/faucet_claim" element={<FaucetClaim />} />
       <Route path="/faucet" element={<Faucet />} />
       <Route path="/linksapprove" element={<LinksApprove />} />
       <Route path="/links" element={<Links />} />
+      <Route path="/clix" element={<Clix />} />
       <Route path="/offerscrypto" element={<Offerscrypto />} />
       <Route path="/bitcotasks" element={<Bitcotasks />} />
       <Route path="/offersall" element={<OffersAll />} />
@@ -72,6 +76,7 @@ function App() {
       <Route path="/referrals" element={<Referrals />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/code/:code" element={<Home />} />
       <Route index element={<Home />} />
     </Routes>
   );

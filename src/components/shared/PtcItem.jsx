@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Countdown from "react-countdown";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import transferIcon from "../../assets/transfer.svg";
 import { setModalOpen, setPtcRewards } from "../../store/generalSlice";
@@ -22,6 +22,7 @@ const PtcItem = ({
   const [isDisabled, setIsDisabled] = useState(false);
 
   const dispatch = useDispatch();
+  const { curLang } = useSelector((state) => state.general);
 
   const linkClick = () => {
     if (!isDisabled) {
@@ -64,7 +65,9 @@ const PtcItem = ({
         <p>{title}</p>
         <div className="challenge-lk-content-block-top-right">
           <img src={transferIcon} alt="" />
-          <span>{interval} ч</span>
+          <span>
+            {interval} {curLang === "en" ? "h" : "ч"}
+          </span>
         </div>
       </div>
       <div className="challenge-lk-content-block-buttons">
@@ -75,7 +78,7 @@ const PtcItem = ({
               !isDisabled && "btn-challenge-active"
             } ${isDisabled && "btn-disabled"}`}
           >
-            Перейти
+            {curLang === "en" ? "Visit" : "Перейти"}
           </Link>
         ) : (
           <>
@@ -90,6 +93,8 @@ const PtcItem = ({
                   date={new Date().getTime() + 1000 * secondsWait}
                   renderer={countDownFunc}
                 />
+              ) : curLang === "en" ? (
+                "Visit"
               ) : (
                 "Перейти"
               )}
@@ -98,7 +103,7 @@ const PtcItem = ({
         )}
         <div className="challenge-lk-content-block-buttons-right">
           <button className="btn-green-tokens__challenge">
-            {tokens} токенов
+            {tokens} {curLang === "en" ? "tokens" : "токенов"}
           </button>
           <button className="btn-purple-tokens__challenge">{exp} exp</button>
         </div>

@@ -31,7 +31,13 @@ const BlogPage = () => {
         <section class="blog-section">
           <div class="container">
             <div class="blog-page-section">
-              <span>21 DEC 2021</span>
+              <span>
+                {new Date(data?.createdAt).toLocaleString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </span>
               <h1>{data?.title}</h1>
               <p class="blog-page-section-p-first">{data?.description}</p>
               <div

@@ -37,6 +37,7 @@ const Ptc = () => {
     isModalPtcOpen,
   ]);
   const { data } = getData(curType);
+  const { curLang } = useSelector((state) => state.general);
 
   const [addUserTokens] = useAddUserTokensMutation();
   const [levelUpUser] = useLevelUpUserMutation();
@@ -56,7 +57,10 @@ const Ptc = () => {
   };
 
   const setReward = async () => {
-    const tokensResp = await addUserTokens({ tokens: tokensPtcReward });
+    const tokensResp = await addUserTokens({
+      tokens: tokensPtcReward,
+      type: "ptc",
+    });
     const levelUpResp = await levelUpUser({ exp: expPtcReward });
     const claimedResp = await setClaimed({
       ptcId,
@@ -93,9 +97,6 @@ const Ptc = () => {
     <main>
       <Layout title="Rocketcoin - PTC">
         <section className="content-lk">
-          <a href="#!" className="btn-open-modal-panel-lk">
-            Меню кабинета
-          </a>
           <SideBar />
           <div class="right-content-lk">
             <h1 class="title-page-lk">PTC</h1>
@@ -105,7 +106,7 @@ const Ptc = () => {
                   class={`block-filter ${isFirstActive && "active-filter"}`}
                   onClick={() => changeActive("first")}
                 >
-                  Окно
+                  {curLang === "en" ? "Window" : "Окно"}
                 </div>
                 <div
                   class={`block-filter ${isSecondActive && "active-filter"}`}
@@ -162,13 +163,25 @@ const Ptc = () => {
               autocomplete="one-time-code"
               required
               className="captcha-input"
-              placeholder="Введите значение"
+              placeholder={
+                curLang === "en" ? "Enter the value" : "Введите значение"
+              }
             />
             {error && (
-              <p className="captcha-label-error">Значения не совпадают</p>
+              <p className="captcha-label-error">
+                {curLang === "en"
+                  ? "Values dont match"
+                  : "Значения не совпадают"}
+              </p>
             )}
             <button className="captcha-btn btn-task" onClick={submitCaptcha}>
-              {isSuccess ? "Успешно" : "Подтвердить"}
+              {isSuccess
+                ? curLang === "en"
+                  ? "Success"
+                  : "Успешно!"
+                : curLang === "en"
+                ? "Submit"
+                : "Подтвердить"}
             </button>
           </div>
         </div>

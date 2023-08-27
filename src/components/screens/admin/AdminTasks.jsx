@@ -14,7 +14,6 @@ const AdminTasks = () => {
   const [desc, setDesc] = useState("");
   const [time, setTime] = useState("");
   const [tokensReward, setTokensReward] = useState("");
-  const [claimsAvailable, setClaimsAvailable] = useState("");
   const [interval, setInterval] = useState("");
   const [instruction, setInstruction] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
@@ -25,7 +24,6 @@ const AdminTasks = () => {
     desc,
     time,
     tokensReward,
-    claimsAvailable,
     interval,
     instruction,
   ]);
@@ -51,7 +49,6 @@ const AdminTasks = () => {
         description: desc,
         timeMinutes: Number(time),
         tokensReward: Number(tokensReward),
-        claimsAvailable: Number(claimsAvailable),
         interval: Number(interval),
         instruction,
       };
@@ -97,7 +94,6 @@ const AdminTasks = () => {
                       tokensReward,
                       timeMinutes,
                       description,
-                      claimsAvailable,
                     } = item.task;
                     return (
                       <TaskItemAdmin
@@ -108,8 +104,6 @@ const AdminTasks = () => {
                         desc={description}
                         time={timeMinutes}
                         reward={tokensReward}
-                        views={2}
-                        viewsTotal={claimsAvailable}
                       />
                     );
                   })}
@@ -173,17 +167,6 @@ const AdminTasks = () => {
                   required
                   value={tokensReward}
                   onChange={(e) => setTokensReward(e.target.value)}
-                  autocomplete="one-time-code"
-                />
-              </label>
-              <label>
-                Количество выполнений
-                <input
-                  type="text"
-                  name="tokens-reward"
-                  required
-                  value={claimsAvailable}
-                  onChange={(e) => setClaimsAvailable(e.target.value)}
                   autocomplete="one-time-code"
                 />
               </label>

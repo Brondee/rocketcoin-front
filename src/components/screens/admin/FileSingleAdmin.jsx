@@ -55,6 +55,7 @@ const FileSingleAdmin = () => {
       const userResp = await addUserTokensDif({
         userId: data?.userId,
         tokens: data?.file?.tokensReward,
+        type: "files",
       });
       const expResp = await levelUpUserDif({
         userId: data?.userId,

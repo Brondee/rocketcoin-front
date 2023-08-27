@@ -13,9 +13,6 @@ const Files = () => {
     <main>
       <Layout title="Rocketcoin - Файлы">
         <section className="content-lk">
-          <a href="#!" className="btn-open-modal-panel-lk">
-            Меню кабинета
-          </a>
           <SideBar />
           <div className="right-content-lk">
             <h1 className="title-page-lk">Файлы</h1>

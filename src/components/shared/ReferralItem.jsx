@@ -1,6 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-const ReferralItem = ({ name, earnedTokens, createdAt, updatedAt }) => {
+const ReferralItem = ({ name, earnedCoins, createdAt, updatedAt }) => {
+  const { curLang } = useSelector((state) => state.general);
+
   const options = {
     year: "numeric",
     month: "long",
@@ -14,12 +17,23 @@ const ReferralItem = ({ name, earnedTokens, createdAt, updatedAt }) => {
     "ru-Ru",
     options
   );
+
+  const createdAtDateEn = new Date(createdAt).toLocaleDateString(
+    "en-US",
+    options
+  );
+  const updatedAtDateEn = new Date(updatedAt).toLocaleDateString(
+    "en-US",
+    options
+  );
   return (
     <tr>
       <td>{name}</td>
-      <td>{earnedTokens || 0} токенов</td>
-      <td>{createdAtDate}</td>
-      <td>{updatedAtDate}</td>
+      <td>
+        {earnedCoins} {curLang === "en" ? "tokens" : "токенов"}
+      </td>
+      <td>{curLang === "en" ? createdAtDateEn : createdAtDate}</td>
+      <td>{curLang === "en" ? updatedAtDateEn : updatedAtDate}</td>
     </tr>
   );
 };

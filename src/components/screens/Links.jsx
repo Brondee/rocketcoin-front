@@ -4,11 +4,13 @@ import SideBar from "../shared/SideBar";
 import LinkItem from "../shared/LinkItem";
 import { useGetLinksInfoQuery } from "../../store/links/linksApiSlice";
 import generateLinksArray from "../../utils/generateLinksArray";
+import { useSelector } from "react-redux";
 
 const Links = () => {
   const [ip, setIp] = useState("");
 
   const { data } = useGetLinksInfoQuery(ip);
+  const { curLang } = useSelector((state) => state.general);
 
   const getData = async () => {
     const res = await fetch("https://geolocation-db.com/json/");
@@ -25,14 +27,15 @@ const Links = () => {
 
   return (
     <main>
-      <Layout title="Rocketcoin - Ссылки">
+      <Layout
+        title={`Rocketcoin - ${curLang === "en" ? "Shortlinks" : "Ссылки"}`}
+      >
         <section className="content-lk">
-          <a href="#!" className="btn-open-modal-panel-lk">
-            Меню кабинета
-          </a>
           <SideBar />
           <div className="right-content-lk">
-            <h1 className="title-page-lk">Ссылки</h1>
+            <h1 className="title-page-lk">
+              {curLang === "en" ? "Shortlinks" : "Ссылки"}
+            </h1>
             <div className="wrapper-page-lk">
               <div className="content-block-flex-lk-white">
                 <div className="task-offers-content">
@@ -57,10 +60,10 @@ const Links = () => {
                       />
                     );
                   })}
-                  <div className="advertising-blocks">
-                    <div className="advertising-block">Реклама</div>
-                    <div className="advertising-block">Реклама</div>
-                    <div className="advertising-block">Реклама</div>
+                  <div className="promotion-blocks">
+                    <div className="promotion-block">Реклама</div>
+                    <div className="promotion-block">Реклама</div>
+                    <div className="promotion-block">Реклама</div>
                   </div>
                   {secondArray?.map((item, index) => {
                     const {
@@ -83,10 +86,10 @@ const Links = () => {
                       />
                     );
                   })}
-                  <div className="advertising-blocks">
-                    <div className="advertising-block">Реклама</div>
-                    <div className="advertising-block">Реклама</div>
-                    <div className="advertising-block">Реклама</div>
+                  <div className="promotion-blocks">
+                    <div className="promotion-block">Реклама</div>
+                    <div className="promotion-block">Реклама</div>
+                    <div className="promotion-block">Реклама</div>
                   </div>
                   {thirdArray?.map((item, index) => {
                     const {

@@ -36,19 +36,19 @@ const PtcIframe = () => {
   const [setClaimed] = useSetClaimedMutation();
   const [incrementCount] = useIncrementCountMutation();
 
-  const handleStart = () => clockRef.current.start();
-  const handlePause = () => clockRef.current.pause();
-
-  window.onfocus = function () {
-    handleStart();
-  };
-
-  window.onblur = function () {
-    handlePause();
+  const checkDocumentFocus = () => {
+    if (document.hasFocus()) {
+      clockRef.current.start();
+    } else {
+      clockRef.current.pause();
+    }
   };
 
   const setReward = async () => {
-    const tokensResp = await addUserTokens({ tokens: data?.tokensReward });
+    const tokensResp = await addUserTokens({
+      tokens: data?.tokensReward,
+      type: "ptc",
+    });
     const levelUpResp = await levelUpUser({ exp: data?.expReward });
     const claimedResp = await setClaimed({
       ptcId: Number(window.location.href.split("/")[4]),
@@ -84,6 +84,10 @@ const PtcIframe = () => {
   };
 
   useEffect(() => {
+    setInterval(checkDocumentFocus, 500);
+  }, []);
+
+  useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
 
@@ -102,12 +106,16 @@ const PtcIframe = () => {
           ref={clockRef}
         />
       </div>
-      <iframe
-        title={`ptc-${data?.id}`}
-        src={data?.link}
-        frameborder="0"
-        className="ptc-iframe"
-      ></iframe>
+
+      <div className="frame-cont" onBlur={() => console.log("focus")}>
+        <iframe
+          title={`ptc-${data?.id}`}
+          src={data?.link}
+          frameborder="0"
+          className="ptc-iframe"
+        ></iframe>
+      </div>
+      <div className="ptc-bottom-container"></div>
       <div className={`captcha-modal ${isModalOpen && "modal-active"}`}>
         <div className="captcha-modal-inner">
           <LoadCanvasTemplateNoReload />

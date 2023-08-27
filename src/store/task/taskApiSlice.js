@@ -15,9 +15,10 @@ export const taskApiSlice = apiSlice.injectEndpoints({
       query: (id) => `/task/single_approve/${id}`,
     }),
     addApproveTask: builder.mutation({
-      query: (taskId) => ({
-        url: `/task/approve_add/${taskId}`,
+      query: (credentials) => ({
+        url: `/task/approve_add/${credentials.taskId}`,
         method: "POST",
+        body: { dopInfo: credentials.dopInfo },
       }),
     }),
     addTask: builder.mutation({

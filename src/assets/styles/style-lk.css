@@ -435,7 +435,7 @@
 }
 /*awards*/
 
-.advertising-container-block-top {
+.promotion-container-block-top {
   width: 100%;
   height: 48px;
   display: flex;
@@ -451,16 +451,16 @@
   background: #ddebff;
   border-radius: 6px 6px 0px 0px;
 }
-.advertising-container-block {
+.promotion-container-block {
   background: #ffffff;
   border: 1px solid #e0e2e7;
   border-radius: 6px;
 }
-.advertising-container-block-input {
+.promotion-container-block-input {
   display: flex;
   align-items: center;
 }
-.advertising-container-block-input input {
+.promotion-container-block-input input {
   background: #ffffff;
   border-radius: 6px 0px 0px 6px;
   font-style: normal;
@@ -473,16 +473,16 @@
   border: 1px solid rgba(0, 16, 61, 0.12);
   color: #2c2d2e;
 }
-.advertising-container-block-content {
+.promotion-container-block-content {
   padding: 0 12px 32px 12px;
 }
-.advertising-container-block-select {
+.promotion-container-block-select {
   position: relative;
   width: 132px;
   height: 46px;
   margin: 20px 0;
 }
-.advertising-container-block-select select {
+.promotion-container-block-select select {
   width: 132px;
   height: 46px;
   background: #ffffff;
@@ -490,16 +490,16 @@
   border-radius: 12px;
   padding: 16px 12px;
 }
-.advertising-container-block-select select {
+.promotion-container-block-select select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
 
-.advertising-container-block-select select::-ms-expand {
+.promotion-container-block-select select::-ms-expand {
   display: none;
 }
-.advertising-container-block-select img {
+.promotion-container-block-select img {
   position: absolute;
   top: 21px;
   right: 18px;
@@ -531,7 +531,7 @@
   transition: 0.3s;
   background: #1c39ff;
 }
-.advertising-container-block-input button {
+.promotion-container-block-input button {
   width: 190px;
   height: 46px;
   display: flex;
@@ -575,13 +575,13 @@
 .form-input-block-long {
   width: 100%;
 }
-.advertising-container-block-content-form {
+.promotion-container-block-content-form {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   padding: 0 12px 32px 12px;
 }
-.advertising-container {
+.promotion-container {
   gap: 30px;
   display: flex;
   flex-direction: column;
@@ -820,7 +820,7 @@
   background-color: #3e8bf3;
   opacity: 1;
 }
-.buy-advertising {
+.buy-promotion {
   margin: 0 auto;
   display: flex;
   margin-top: 10px;
@@ -1327,11 +1327,11 @@
   .faucet-block {
     gap: 20px;
   }
-  .advertising-container-block-input input,
-  .advertising-container-block-input button {
+  .promotion-container-block-input input,
+  .promotion-container-block-input button {
     font-size: 16px;
   }
-  .advertising-container-block-top {
+  .promotion-container-block-top {
     font-size: 18px;
   }
   .form-input-block p {
