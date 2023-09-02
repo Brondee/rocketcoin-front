@@ -2915,6 +2915,58 @@ iframe {
 .faucet-claim-inner .btn-lk-account {
   margin-top: 25px;
 }
+
+.adblock-modal {
+  position: fixed;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  z-index: 200;
+}
+.adblock-modal.active {
+  display: flex;
+}
+.adblock-modal-inner {
+  width: 500px;
+  padding: 40px 20px;
+  border-radius: 20px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.adblock-modal-inner h2 {
+  font-size: 40px;
+  color: #000;
+  margin-bottom: 10px;
+}
+.adblock-modal-inner p {
+  font-size: 20px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 20px;
+}
+.adblock-reload {
+  padding: 12px 20px;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  color: #ffffff;
+  background: #465efd;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+.adblock-reload:hover {
+  opacity: 0.6;
+}
+
 .btn-lk-account-2 {
   width: fit-content;
 }
@@ -3024,6 +3076,16 @@ iframe {
   background: #ffffff;
   border: 1px solid rgba(0, 16, 61, 0.12);
   border-radius: 6px;
+  cursor: pointer;
+}
+.flex-blocks-wallet-you-can-block.active {
+  border: 1px solid #465efd;
+}
+.flex-blocks-wallet-you-can-block.active::after {
+  display: none;
+}
+.withdraw-minimal-error {
+  color: #e42222 !important;
 }
 .flex-blocks-wallet-you-can-block img {
   width: 70px;

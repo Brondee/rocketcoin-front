@@ -1,7 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import SideBar from "../shared/SideBar";
 import Layout from "../layout/Layout";
-import { useGetUserInfoQuery } from "../../store/user/userApiSlice";
+import {
+  useGetUserInfoQuery,
+  useUpdateUserInfoMutation,
+} from "../../store/user/userApiSlice";
 import generateBonusArray from "../../utils/generateBonusArray";
 import BonusItem from "../shared/BonusItem";
 import {
@@ -10,6 +13,7 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { useSelector } from "react-redux";
+import AdblockModal from "../shared/AdblockModal";
 
 const Bonus = () => {
   const [bonusStreak, setBonusStreak] = useState(0);
@@ -31,6 +35,8 @@ const Bonus = () => {
   const { data } = getInfo();
   const { curLang } = useSelector((state) => state.general);
 
+  const [updateUserInfo] = useUpdateUserInfoMutation();
+
   const openCaptcha = (bonusId) => {
     setCurBonusId(bonusId);
     setIsCaptchaOpen(true);
@@ -48,22 +54,27 @@ const Bonus = () => {
   };
 
   useEffect(() => {
-    setBonusArrayState(generateBonusArray(50, 200, 12, 0.1));
+    setBonusArrayState(generateBonusArray(7, 200, 12, 0.1));
     setBonusStreak(data?.bonusStreak);
     if (data?.bonusStreak === 0) {
       setNextBonusAv(true);
     } else {
       if (
-        new Date().getDate() > new Date(data?.bonusLastTaken).getDate() ||
+        new Date().getDate() > new Date(data?.bonusLastTaken).getDate() + 1 ||
         new Date().getMonth() > new Date(data?.bonusLastTaken).getMonth() ||
         new Date().getFullYear() > new Date(data?.bonusLastTaken).getFullYear()
+      ) {
+        updateUserInfo({ bonusStreak: 0 });
+        window.location.reload();
+      } else if (
+        new Date().getDate() > new Date(data?.bonusLastTaken).getDate()
       ) {
         setNextBonusAv(true);
       } else {
         setNextBonusAv(false);
       }
     }
-  }, [data?.bonusLastTaken, data?.bonusStreak]);
+  }, [data?.bonusLastTaken, data?.bonusStreak, updateUserInfo]);
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -161,6 +172,7 @@ const Bonus = () => {
             </button>
           </div>
         </div>
+        <AdblockModal />
       </Layout>
     </main>
   );

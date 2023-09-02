@@ -3,6 +3,7 @@ import {
   useLevelUpUserMutation,
   useUpdateUserInfoMutation,
 } from "../../store/user/userApiSlice";
+import { useSelector } from "react-redux";
 
 const ChallengeItem = ({
   id,
@@ -15,6 +16,8 @@ const ChallengeItem = ({
 }) => {
   const [updateUserInfo] = useUpdateUserInfoMutation();
   const [levelUpUser] = useLevelUpUserMutation();
+
+  const { curLang } = useSelector((state) => state.general);
 
   const getChallengeReward = async () => {
     if (completed >= toComplete && !isDisabled) {
@@ -123,13 +126,21 @@ const ChallengeItem = ({
           }`}
           onClick={getChallengeReward}
         >
-          {isDisabled ? "Собрано" : "Собрать"}
+          {isDisabled
+            ? curLang === "en"
+              ? "Claimed"
+              : "Собрано"
+            : curLang === "en"
+            ? "Claim"
+            : "Собрать"}
         </button>
         <div class="challenge-lk-content-block-buttons-right">
           <button class="btn-purple-tokens__challenge">
             {completed} / {toComplete}
           </button>
-          <button class="btn-green-tokens__challenge">{tokens} токенов</button>
+          <button class="btn-green-tokens__challenge">
+            {tokens} {curLang === "en" ? "tokens" : "токенов"}
+          </button>
           <button class="btn-purple-tokens__challenge">{exp} exp</button>
         </div>
       </div>

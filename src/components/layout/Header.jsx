@@ -20,6 +20,7 @@ const Header = () => {
 
   const { curLang } = useSelector((state) => state.general);
   const { token } = useSelector((state) => state.auth);
+
   useEffect(() => {
     setIsLoggedIn(false);
     if (

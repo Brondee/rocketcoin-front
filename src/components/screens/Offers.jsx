@@ -6,6 +6,7 @@ import StarsContainer from "../ui/StarsContainer";
 import { useGetRatingInfoQuery } from "../../store/rating/ratingApiSlice";
 import { useGetUserInfoQuery } from "../../store/user/userApiSlice";
 import { useSelector } from "react-redux";
+import AdblockModal from "../shared/AdblockModal";
 
 const Offers = () => {
   const response = useGetUserInfoQuery();
@@ -167,6 +168,7 @@ const Offers = () => {
             </div>
           </div>
         </section>
+        <AdblockModal />
       </Layout>
     </main>
   );

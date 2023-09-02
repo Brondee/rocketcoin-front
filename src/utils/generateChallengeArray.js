@@ -1,8 +1,8 @@
-const generateChallengeArray = (data) => {
+const generateChallengeArray = (data, lang) => {
   let challengeArray = [
     {
       id: 0,
-      title: "Завершить 30 ссылок",
+      title: lang === "en" ? "Complete 30 links" : "Завершить 30 ссылок",
       completed: data?.linksDayCount,
       toComplete: 30,
       tokens: 10000,
@@ -11,7 +11,7 @@ const generateChallengeArray = (data) => {
     },
     {
       id: 1,
-      title: "Завершить 20 ссылок",
+      title: lang === "en" ? "Complete 20 links" : "Завершить 20 ссылок",
       completed: data?.linksDayCount,
       toComplete: 20,
       tokens: 8000,
@@ -20,7 +20,7 @@ const generateChallengeArray = (data) => {
     },
     {
       id: 2,
-      title: "Завершить 10 ссылок",
+      title: lang === "en" ? "Complete 10 links" : "Завершить 10 ссылок",
       completed: data?.linksDayCount,
       toComplete: 10,
       tokens: 5000,
@@ -29,7 +29,7 @@ const generateChallengeArray = (data) => {
     },
     {
       id: 3,
-      title: "Завершить 5 ссылок",
+      title: lang === "en" ? "Complete 5 links" : "Завершить 5 ссылок",
       completed: data?.linksDayCount,
       toComplete: 5,
       tokens: 3000,
@@ -38,7 +38,7 @@ const generateChallengeArray = (data) => {
     },
     {
       id: 4,
-      title: "Завершить 100 faucet",
+      title: lang === "en" ? "Complete 100 faucet" : "Завершить 100 faucet",
       completed: data?.faucetDayCount,
       toComplete: 100,
       tokens: 14000,
@@ -47,7 +47,7 @@ const generateChallengeArray = (data) => {
     },
     {
       id: 5,
-      title: "Завершить 50 faucet",
+      title: lang === "en" ? "Complete 50 faucet" : "Завершить 50 faucet",
       completed: data?.faucetDayCount,
       toComplete: 50,
       tokens: 10000,
@@ -56,7 +56,7 @@ const generateChallengeArray = (data) => {
     },
     {
       id: 6,
-      title: "Завершить 30 faucet",
+      title: lang === "en" ? "Complete 30 faucet" : "Завершить 30 faucet",
       completed: data?.faucetDayCount,
       toComplete: 30,
       tokens: 8000,
@@ -65,7 +65,7 @@ const generateChallengeArray = (data) => {
     },
     {
       id: 7,
-      title: "Завершить 10 faucet",
+      title: lang === "en" ? "Complete 10 faucet" : "Завершить 10 faucet",
       completed: data?.faucetDayCount,
       toComplete: 10,
       tokens: 5000,
@@ -74,7 +74,7 @@ const generateChallengeArray = (data) => {
     },
     {
       id: 8,
-      title: "Завершить 50 PTC",
+      title: lang === "en" ? "Complete 50 PTC" : "Завершить 50 PTC",
       completed: data?.ptcDayCount,
       toComplete: 50,
       tokens: 15000,
@@ -83,7 +83,7 @@ const generateChallengeArray = (data) => {
     },
     {
       id: 9,
-      title: "Завершить 25 PTC",
+      title: lang === "en" ? "Complete 25 PTC" : "Завершить 25 PTC",
       completed: data?.ptcDayCount,
       toComplete: 25,
       tokens: 10000,
@@ -92,7 +92,7 @@ const generateChallengeArray = (data) => {
     },
     {
       id: 10,
-      title: "Завершить 10 PTC",
+      title: lang === "en" ? "Complete 10 PTC" : "Завершить 10 PTC",
       completed: data?.ptcDayCount,
       toComplete: 10,
       tokens: 5000,
@@ -101,7 +101,8 @@ const generateChallengeArray = (data) => {
     },
     {
       id: 11,
-      title: "3000 токенов на Офферах",
+      title:
+        lang === "en" ? "3000 tokens with Offers" : "3000 токенов на Офферах",
       completed: data?.offerwallDayCount,
       toComplete: 3000,
       tokens: 6000,
@@ -110,7 +111,8 @@ const generateChallengeArray = (data) => {
     },
     {
       id: 12,
-      title: "2000 токенов на Офферах",
+      title:
+        lang === "en" ? "2000 tokens with Offers" : "2000 токенов на Офферах",
       completed: data?.offerwallDayCount,
       toComplete: 2000,
       tokens: 4000,
@@ -119,7 +121,8 @@ const generateChallengeArray = (data) => {
     },
     {
       id: 13,
-      title: "500 токенов на Офферах",
+      title:
+        lang === "en" ? "500 tokens with Offers" : "500 токенов на Офферах",
       completed: data?.offerwallDayCount,
       toComplete: 500,
       tokens: 2000,

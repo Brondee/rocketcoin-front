@@ -47,6 +47,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
         body: { ...credentials },
       }),
     }),
+    reduceTokens: builder.mutation({
+      query: (credentials) => ({
+        url: "/user/reduce",
+        method: "PATCH",
+        body: { ...credentials },
+      }),
+    }),
   }),
 });
 
@@ -58,4 +65,5 @@ export const {
   useLevelUpUserMutation,
   useLevelUpUserDifMutation,
   useIncrementCountMutation,
+  useReduceTokensMutation,
 } = userApiSlice;

@@ -5,6 +5,7 @@ import LevelItem from "../shared/LevelItem";
 import generateLevelsArray from "../../utils/generateLevelsArray";
 import { useGetUserInfoQuery } from "../../store/user/userApiSlice";
 import { useSelector } from "react-redux";
+import AdblockModal from "../shared/AdblockModal";
 
 const Levels = () => {
   const { data } = useGetUserInfoQuery();
@@ -17,35 +18,6 @@ const Levels = () => {
       <Layout title={`Rocketcoin - ${curLang === "en" ? "Levels" : "Уровни"}`}>
         <section className="content-lk">
           <SideBar />
-          {/* <div class="right-content-lk">
-            <h1 class="title-page-lk">Уровни</h1>
-            <div class="wrapper-page-lk">
-              <div class="level-container-parent">
-                <div class="level-container">
-                  <div class="level-container-top">
-                    <p>Уровень</p>
-                    <p>Награда - токены</p>
-                    <p class="level-container-top-bonus">
-                      Зарабатывающий <br /> бонус (Faucet)
-                    </p>
-                  </div>
-                  <div class="level-container-content">
-                    {levelsArray?.map((level) => {
-                      const { number, levelTokens, earningBonus } = level;
-                      return (
-                        <LevelItem
-                          key={number}
-                          levelNum={number}
-                          tokens={levelTokens}
-                          bonus={earningBonus}
-                        />
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> */}
           <div class="right-content-lk">
             <h1 class="title-page-lk">
               {curLang === "en" ? "Levels" : "Уровни"}
@@ -87,6 +59,7 @@ const Levels = () => {
             </div>
           </div>
         </section>
+        <AdblockModal />
       </Layout>
     </main>
   );

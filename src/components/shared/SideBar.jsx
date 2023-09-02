@@ -94,7 +94,7 @@ const SideBar = () => {
           </li>
           <li>
             <img src={pieChartLine} alt="" />
-            <Link to="/ad">{curLang === "en" ? "Ads" : "Реклама"}</Link>
+            <Link to="/ad">{curLang === "en" ? "Ad" : "Реклама"}</Link>
           </li>
           <li>
             <img src={trophyLine} alt="" />
@@ -106,7 +106,9 @@ const SideBar = () => {
         </li> */}
           <li>
             <img src={archiveLine} alt="" />
-            <Link to="/files">{curLang === "en" ? "Files" : "Файлы"}</Link>
+            <Link to="/files">
+              {curLang === "en" ? "Support us" : "Поддержать"}
+            </Link>
           </li>
 
           <li>

@@ -6,6 +6,7 @@ import { useGetUserInfoQuery } from "../../store/user/userApiSlice";
 import Countdown from "react-countdown";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import AdblockModal from "../shared/AdblockModal";
 
 const Faucet = () => {
   const [isFaucetClaimed, setIsFaucetClaimed] = useState(false);
@@ -103,6 +104,7 @@ const Faucet = () => {
             </div>
           </div>
         </section>
+        <AdblockModal />
       </Layout>
     </main>
   );

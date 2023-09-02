@@ -181,7 +181,10 @@ const Profile = () => {
                               ? "Invested funds:"
                               : "Вложенно средств:"}
                           </h4>
-                          <p>120 {curLang === "en" ? "tokens" : "токенов"}</p>
+                          <p>
+                            {data?.investedTokens}{" "}
+                            {curLang === "en" ? "tokens" : "токенов"}
+                          </p>
                         </div>
                       </div>
                       <div className="block-content-second-tab-account">

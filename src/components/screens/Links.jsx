@@ -5,6 +5,7 @@ import LinkItem from "../shared/LinkItem";
 import { useGetLinksInfoQuery } from "../../store/links/linksApiSlice";
 import generateLinksArray from "../../utils/generateLinksArray";
 import { useSelector } from "react-redux";
+import AdblockModal from "../shared/AdblockModal";
 
 const Links = () => {
   const [ip, setIp] = useState("");
@@ -117,6 +118,7 @@ const Links = () => {
             </div>
           </div>
         </section>
+        <AdblockModal />
       </Layout>
     </main>
   );

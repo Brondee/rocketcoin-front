@@ -17,6 +17,7 @@ import {
   useIncrementCountMutation,
 } from "../../store/user/userApiSlice";
 import { useSelector } from "react-redux";
+import AdblockModal from "../shared/AdblockModal";
 
 const Ptc = () => {
   const [isFirstActive, setIsFirstActive] = useState(true);
@@ -185,6 +186,7 @@ const Ptc = () => {
             </button>
           </div>
         </div>
+        <AdblockModal />
       </Layout>
     </main>
   );

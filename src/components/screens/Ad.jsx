@@ -1,14 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import SideBar from "../shared/SideBar";
 import { Range, getTrackBackground } from "react-range";
 import { useAddPtcMutation } from "../../store/ptc/ptcApiSlice";
 
 import arrowSelect from "../../assets/arr-select.svg";
+import { useSelector } from "react-redux";
+import {
+  useGetUserInfoQuery,
+  useReduceTokensMutation,
+} from "../../store/user/userApiSlice";
 
 const Ad = () => {
   const [deposit, setDeposit] = useState("");
   const [depositConverted, setDepositConverted] = useState(333330);
+
+  const { curLang } = useSelector((state) => state.general);
+  const getData = useCallback(useGetUserInfoQuery, [deposit, depositConverted]);
+  const { data } = getData();
+  const [reduceTokens] = useReduceTokensMutation();
 
   const [rangeValues, setRangeValues] = useState({ values: [20] });
   const [title, setTitle] = useState("");
@@ -20,17 +30,19 @@ const Ad = () => {
   const [finalPrice, setFinalPrice] = useState(30000);
   const [error, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [notEnoughError, setNotEnoughError] = useState(false);
 
   const [addPtc] = useAddPtcMutation();
 
   const submitAd = async () => {
     if (views < 100) {
       setIsError(true);
-    } else {
+    } else if (finalPrice > data?.investedTokens) {
+      setNotEnoughError(true);
+    } else if (title.length > 0 && link.length > 0 && desc.length > 0) {
       let tokensReward = 0;
       let expReward = 0;
       let secondsWait = 0;
-
       if (adType === "window") {
         if (viewsCount === "5") {
           tokensReward = 25;
@@ -83,10 +95,15 @@ const Ad = () => {
         };
         const ptcResp = await addPtc(ptcData);
         if (ptcResp.data) {
-          setIsSuccess(true);
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
+          const resp = await reduceTokens({
+            tokens: Math.round(Number(finalPrice)),
+          });
+          if (resp.data) {
+            setIsSuccess(true);
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
+          }
         }
         console.log(ptcResp);
       } catch (err) {
@@ -122,28 +139,41 @@ const Ad = () => {
     calculatePrice();
   }, [adType, views, viewsCount]);
 
+  useEffect(() => {
+    setDepositConverted(deposit * 33333);
+  }, [deposit]);
+
   return (
     <main>
-      <Layout title="Rocketcoin - Реклама">
+      <Layout
+        title={`Rocketcoin - ${curLang === "en" ? "Advertisement" : "Реклама"}`}
+      >
         <section className="content-lk">
           <SideBar />
           <div class="right-content-lk">
-            <h1 class="title-page-lk">Реклама</h1>
+            <h1 class="title-page-lk">
+              {curLang === "en" ? "Advertisement" : "Реклама"}
+            </h1>
             <div class="wrapper-page-lk">
               <div class="promotion-container">
                 <div class="promotion-container-block">
                   <div class="promotion-container-block-top">
-                    Купите токены для вашей рекламы
+                    {curLang === "en"
+                      ? "Buy tokens for your advertisement"
+                      : "Купите токены для вашей рекламы"}
                   </div>
                   <div class="promotion-container-block-content">
                     <div class="promotion-container-block-input">
                       <input
                         type="text"
-                        placeholder="10"
+                        placeholder="0"
                         value={deposit}
                         onChange={(e) => setDeposit(e.target.value)}
                       />
-                      <button type="button">{depositConverted} токенов</button>
+                      <button type="button">
+                        {depositConverted}{" "}
+                        {curLang === "en" ? "tokens" : "токенов"}
+                      </button>
                     </div>
                     <div class="promotion-container-block-select">
                       <select>
@@ -151,45 +181,72 @@ const Ad = () => {
                       </select>
                       <img src={arrowSelect} alt="" />
                     </div>
-                    <button class="make-depozit" type="button">
-                      Сделать депозит
-                    </button>
+                    <form
+                      action="https://faucetpay.io/merchant/webscr"
+                      method="post"
+                    >
+                      <input
+                        type="hidden"
+                        value="spooner1fuck"
+                        name="merchant_username"
+                      />
+                      <input
+                        type="hidden"
+                        value="Advertisement tokens"
+                        name="item_description"
+                      />
+                      <input type="hidden" value={deposit} name="amount1" />
+                      <input type="hidden" value="USDT" name="currency1" />
+                      <input type="hidden" name="custom" value={data?.id} />
+                      <input
+                        type="hidden"
+                        name="callback_url"
+                        value="https://rocket-coin.online/checkdeposit.php"
+                      />
+                      <button class="make-depozit" type="submit">
+                        {curLang === "en" ? "Make deposit" : "Сделать депозит"}
+                      </button>
+                    </form>
                   </div>
                 </div>
                 <div class="promotion-container-block">
                   <div class="promotion-container-block-top">
-                    Разместите рекламу
+                    {curLang === "en"
+                      ? "Place advertisement"
+                      : "Разместите рекламу"}
                   </div>
                   <div class="promotion-container-block-content-form">
                     <div class="form-input-block">
-                      <p>Заголовок</p>
+                      <p>{curLang === "en" ? "Title" : "Заголовок"}</p>
                       <input
                         type="text"
-                        placeholder="Заголовок"
+                        placeholder={curLang === "en" ? "Title" : "Заголовок"}
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                       />
                     </div>
                     <div class="form-input-block">
-                      <p>Ссылка</p>
+                      <p>{curLang === "en" ? "Link" : "Ссылка"}</p>
                       <input
                         type="text"
-                        placeholder="Ссылка"
+                        placeholder={curLang === "en" ? "Link" : "Ссылка"}
                         value={link}
                         onChange={(e) => setLink(e.target.value)}
                       />
                     </div>
                     <div class="form-input-block form-input-block-long">
-                      <p>Описание</p>
+                      <p>{curLang === "en" ? "Description" : "Описание"}</p>
                       <input
                         type="text"
-                        placeholder="Описание"
+                        placeholder={
+                          curLang === "en" ? "Description" : "Описание"
+                        }
                         value={desc}
                         onChange={(e) => setDesc(e.target.value)}
                       />
                     </div>
                     <div class="form-input-block">
-                      <p>Длительность</p>
+                      <p>{curLang === "en" ? "Duration" : "Длительность"}</p>
                       <div class="form-input-block-select">
                         {adType === "window" ? (
                           <select
@@ -197,16 +254,30 @@ const Ad = () => {
                             onChange={(e) => setViewsCount(e.target.value)}
                           >
                             <option value="5">
-                              5 секунд - 30 токенов за просмотр
+                              5 {curLang === "en" ? "seconds" : "секунда"} - 30{" "}
+                              {curLang === "en"
+                                ? "tokens per view"
+                                : "токенов за просмотр"}
                             </option>
                             <option value="15">
-                              15 секунд - 70 токенов за просмотр
+                              15 {curLang === "en" ? "seconds" : "секунда"} - 70{" "}
+                              {curLang === "en"
+                                ? "tokens per view"
+                                : "токенов за просмотр"}
                             </option>
                             <option value="30">
-                              30 секунд - 130 токенов за просмотр
+                              30 {curLang === "en" ? "seconds" : "секунда"} -
+                              130{" "}
+                              {curLang === "en"
+                                ? "tokens per view"
+                                : "токенов за просмотр"}
                             </option>
                             <option value="60">
-                              60 секунд - 240 токенов за просмотр
+                              60 {curLang === "en" ? "seconds" : "секунда"} -
+                              240{" "}
+                              {curLang === "en"
+                                ? "tokens per view"
+                                : "токенов за просмотр"}
                             </option>
                           </select>
                         ) : (
@@ -215,16 +286,29 @@ const Ad = () => {
                             onChange={(e) => setViewsCount(e.target.value)}
                           >
                             <option value="5">
-                              5 секунд - 25 токенов за просмотр
+                              5 {curLang === "en" ? "seconds" : "секунда"} - 25{" "}
+                              {curLang === "en"
+                                ? "tokens per view"
+                                : "токенов за просмотр"}
                             </option>
                             <option value="10">
-                              10 секунд - 40 токенов за просмотр
+                              10 {curLang === "en" ? "seconds" : "секунда"} - 40{" "}
+                              {curLang === "en"
+                                ? "tokens per view"
+                                : "токенов за просмотр"}
                             </option>
                             <option value="15">
-                              15 секунд - 60 токенов за просмотр
+                              15 {curLang === "en" ? "seconds" : "секунда"} - 60{" "}
+                              {curLang === "en"
+                                ? "tokens per view"
+                                : "токенов за просмотр"}
                             </option>
                             <option value="30">
-                              30 секунд - 110 токенов за просмотр
+                              30 {curLang === "en" ? "seconds" : "секунда"} -
+                              110{" "}
+                              {curLang === "en"
+                                ? "tokens per view"
+                                : "токенов за просмотр"}
                             </option>
                           </select>
                         )}
@@ -232,7 +316,7 @@ const Ad = () => {
                       </div>
                     </div>
                     <div class="form-input-block">
-                      <p>Тип</p>
+                      <p>{curLang === "en" ? "Type" : "Тип"}</p>
                       <div class="form-input-block-select">
                         <select
                           value={adType}
@@ -240,14 +324,18 @@ const Ad = () => {
                             setAdType(e.target.value);
                           }}
                         >
-                          <option value="window">Окно</option>
+                          <option value="window">
+                            {curLang === "en" ? "Window" : "Окно"}
+                          </option>
                           <option value="iframe">Iframe</option>
                         </select>
                         <img src={arrowSelect} alt="" />
                       </div>
                     </div>
                     <div class="form-input-block form-input-block-long">
-                      <p>Всего просмотров</p>
+                      <p>
+                        {curLang === "en" ? "Total views" : "Всего просмотров"}
+                      </p>
                       <input
                         type="text"
                         placeholder="1000"
@@ -256,13 +344,15 @@ const Ad = () => {
                       />
                       {error && (
                         <p className="label-error">
-                          Минимальное количество просмотров: 100
+                          {curLang === "en"
+                            ? "Minimal number of views: 100"
+                            : "Минимальное количество просмотров: 100"}
                         </p>
                       )}
                     </div>
 
                     <div class="filters">
-                      <p>Интервал</p>
+                      <p>{curLang === "en" ? "Interval" : "Интервал"}</p>
                       <Range
                         step={1}
                         min={1}
@@ -343,15 +433,33 @@ const Ad = () => {
                       </div>
                     </div>
                     <div className="ad-total-container">
-                      <p className="ad-total">Итого: {finalPrice} токенов</p>
+                      <p className="ad-total">
+                        {curLang === "en" ? "In total" : "Итого"}: {finalPrice}{" "}
+                        {curLang === "en" ? "tokens" : "токенов"}
+                      </p>
                     </div>
-                    <button
-                      class="buy-promotion"
-                      type="button"
-                      onClick={submitAd}
-                    >
-                      {isSuccess ? "Успешно" : "Купить рекламу"}
-                    </button>
+                    <div className="promotion-btn-error-cont">
+                      <button
+                        class={`buy-promotion ${notEnoughError && "error"}`}
+                        type="button"
+                        onClick={submitAd}
+                      >
+                        {isSuccess
+                          ? curLang === "en"
+                            ? "Success"
+                            : "Успешно"
+                          : curLang === "en"
+                          ? "Buy ad"
+                          : "Купить рекламу"}
+                      </button>
+                      {notEnoughError && (
+                        <p className="promotion-error">
+                          {curLang === "en"
+                            ? "There are not enough tokens on your waller"
+                            : "Не хватает токенов"}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

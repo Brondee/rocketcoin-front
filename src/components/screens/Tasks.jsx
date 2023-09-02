@@ -4,6 +4,7 @@ import SideBar from "../shared/SideBar";
 import { useGetTasksQuery } from "../../store/task/taskApiSlice";
 import TaskItem from "../shared/TaskItem";
 import { useSelector } from "react-redux";
+import AdblockModal from "../shared/AdblockModal";
 
 const Tasks = () => {
   const { data } = useGetTasksQuery();
@@ -51,6 +52,7 @@ const Tasks = () => {
             </div>
           </div>
         </section>
+        <AdblockModal />
       </Layout>
     </main>
   );

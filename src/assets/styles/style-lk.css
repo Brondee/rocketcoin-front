@@ -820,6 +820,12 @@
   background-color: #3e8bf3;
   opacity: 1;
 }
+.promotion-btn-error-cont {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .buy-promotion {
   margin: 0 auto;
   display: flex;
@@ -835,6 +841,14 @@
   font-size: 18px;
   line-height: 24px;
   color: #ffffff;
+}
+.buy-promotion.error {
+  background-color: #ff0000;
+}
+.promotion-error {
+  color: #ff0000;
+  margin-top: 15px;
+  font-size: 18px;
 }
 .slider-contoller__grip {
   position: absolute;
