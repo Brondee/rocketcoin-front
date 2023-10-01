@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import VideoBanner from "../shared/VideoBanner";
 
 import userIcon from "../../assets/img-icons-lk/user.svg";
 import peopleIcon from "../../assets/img-icons-lk/people.svg";
@@ -14,7 +15,6 @@ import awardLine from "../../assets/img-icons-lk/award-line.svg";
 import vectorLine from "../../assets/img-icons-lk/Vector.svg";
 import pieChartLine from "../../assets/img-icons-lk/pie-chart-line.svg";
 import trophyLine from "../../assets/img-icons-lk/trophy-line.svg";
-// import cardPos from "../../assets/img-icons-lk/card-pos.svg";
 import archiveLine from "../../assets/img-icons-lk/archive-line.svg";
 import { useSelector } from "react-redux";
 
@@ -100,10 +100,6 @@ const SideBar = () => {
             <img src={trophyLine} alt="" />
             <Link to="/levels">{curLang === "en" ? "Levels" : "Уровни"}</Link>
           </li>
-          {/* <li>
-          <img src={cardPos} alt="" />
-          <Link to="/support">Support</Link>
-        </li> */}
           <li>
             <img src={archiveLine} alt="" />
             <Link to="/files">
@@ -117,6 +113,7 @@ const SideBar = () => {
           </li>
         </ul>
       </div>
+      <VideoBanner />
     </>
   );
 };

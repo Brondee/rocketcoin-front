@@ -594,6 +594,7 @@
   .right-content-lk {
     padding-right: 0px;
     padding-left: 0px;
+    width: 100%;
   }
   .dropdown2 {
     display: none;
@@ -646,6 +647,30 @@
   }
   .right-btns-content-task a {
     width: 100%;
+  }
+
+  .banner-mob {
+    position: relative;
+    left: 0%;
+    display: block;
+  }
+  .banner-bonus {
+    display: none;
+  }
+  .banner-bonus-mob {
+    display: block;
+    position: relative;
+    left: 0%;
+    background: none;
+  }
+  .banner-mob {
+    position: relative;
+    left: 0%;
+    display: block;
+    background: none;
+  }
+  .td-banners-mob {
+    display: table-cell;
   }
 }
 

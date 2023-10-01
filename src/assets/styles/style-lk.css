@@ -845,6 +845,9 @@
 .buy-promotion.error {
   background-color: #ff0000;
 }
+.contacts-title {
+  color: #000000 !important;
+}
 .promotion-error {
   color: #ff0000;
   margin-top: 15px;

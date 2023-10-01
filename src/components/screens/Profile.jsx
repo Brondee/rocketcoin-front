@@ -17,6 +17,7 @@ import safe2Line from "../../assets/img-all-lk/safe-2-line.svg";
 import calendar2Line from "../../assets/img-all-lk/calendar-2-line.svg";
 import tickIcon from "../../assets/img-all-lk/tick.svg";
 import { useSelector } from "react-redux";
+import RotationBanner from "../shared/RotationBanner";
 
 const Profile = () => {
   const [updateUserInfo] = useUpdateUserInfoMutation();
@@ -27,6 +28,7 @@ const Profile = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isSecondTabActive, setIsSecondTabActive] = useState(true);
   const [isThirdTabActive, setIsThirdTabActive] = useState(false);
+  const [levelPercent, setLevelPercent] = useState(0);
 
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
@@ -101,7 +103,14 @@ const Profile = () => {
     if (data?.login === "rocketcoin_admin") {
       setIsAdmin(true);
     }
-    console.log(data);
+    if (data) {
+      const { level, curLevelExp } = data;
+      if (level === 0) {
+        setLevelPercent((curLevelExp / 1000) * 100);
+      } else {
+        setLevelPercent((curLevelExp / (1000 + level * 100)) * 100);
+      }
+    }
   }, [data]);
 
   return (
@@ -110,9 +119,27 @@ const Profile = () => {
         <section className="content-lk">
           {isAdmin ? <SideBarAdmin /> : <SideBar />}
           <div className="right-content-lk">
-            <h1 className="title-page-lk">
-              {curLang === "en" ? "Account" : "Аккаунт"}
-            </h1>
+            <div className="page-title-ban-cont">
+              <h1 className="title-page-lk">
+                {curLang === "en" ? "Account" : "Аккаунт"}
+              </h1>
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  datasid="382174"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                  dataframe="2259288"
+                />
+              </div>
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  datasid="382175"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                  dataframe="2259289"
+                />
+              </div>
+            </div>
             <div className="wrapper-page-lk">
               <ul className="tab-header">
                 <li
@@ -134,6 +161,16 @@ const Profile = () => {
                   onClick={() => setTabActive(3)}
                 >
                   {curLang === "en" ? "Security" : "Безопасность"}
+                </li>
+                <li>
+                  <div className="banner banner468 banner-profile">
+                    <RotationBanner
+                      width={468}
+                      datasid="382177"
+                      datakey="679f64fa36a4eb3544f2a556b9240afe"
+                      dataframe="2259290"
+                    />
+                  </div>
                 </li>
               </ul>
               <ul className="tab-content">
@@ -164,13 +201,27 @@ const Profile = () => {
                           </p>
                         </div>
                       </div>
-                      <div className="block-content-second-tab-account">
-                        <img src={triphyLine} alt="" />
-                        <div className="text-block-content-second-tab-account">
-                          <h4>
-                            {curLang === "en" ? "Level" : "Уровень аккаунта"}
-                          </h4>
-                          <p>{data?.level} LVL</p>
+                      <div className="level-block-cont">
+                        <div className="block-content-second-tab-account level-block">
+                          <img src={triphyLine} alt="" />
+                          <div className="text-block-content-second-tab-account">
+                            <h4>
+                              {curLang === "en" ? "Level" : "Уровень аккаунта"}
+                            </h4>
+                            <p>{data?.level} LVL</p>
+                          </div>
+                        </div>
+                        <div className="level-progress">
+                          <div className="level-progress-bar">
+                            <div
+                              className="level-progress-inner"
+                              style={{ width: `${levelPercent}%` }}
+                            ></div>
+                          </div>
+                          <p className="level-percentage">
+                            {Math.round(data?.curLevelExp)}/
+                            {1000 + data?.level * 100} exp
+                          </p>
                         </div>
                       </div>
                       <div className="block-content-second-tab-account">
@@ -242,6 +293,13 @@ const Profile = () => {
                             )}
                           </p>
                         </div>
+                      </div>
+                      <div className="banner banner125 banner-profile">
+                        <iframe
+                          title="profile banner"
+                          data-aa="2259291"
+                          src="//ad.a-ads.com/2259291?size=125x125"
+                        ></iframe>
                       </div>
                     </div>
                   </div>

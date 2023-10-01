@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { ReactComponent as Logo } from "../../assets/img/logo.svg";
 import { ReactComponent as Flag1 } from "../../assets/img/flag1.svg";
-import { ReactComponent as Flag2 } from "../../assets/img/flag2.svg";
+import { ReactComponent as Flag10 } from "../../assets/img/flag10.svg";
 import { ReactComponent as ArrowLang } from "../../assets/img/arrow-language.svg";
 import "../../assets/styles/style.css";
 import "../../assets/styles/style-lk.css";
@@ -48,6 +48,7 @@ const Header = () => {
 
   const changeLang = (lang) => {
     dispatch(setCurLang(lang));
+    setIsLangShown(false);
   };
 
   return (
@@ -64,7 +65,7 @@ const Header = () => {
                   {curLang === "en" ? "About" : "О нас"}
                 </Link>
               </li>
-              <li className="link-header-li">
+              {/* <li className="link-header-li">
                 <Link to="/how_works" className="link-header-a">
                   {curLang === "en" ? "How it works" : "Как это работает"}
                 </Link>
@@ -73,7 +74,7 @@ const Header = () => {
                 <Link to="/where_works" className="link-header-a">
                   {curLang === "en" ? "Where we work" : "Где работаем"}
                 </Link>
-              </li>
+              </li> */}
               <li className="link-header-li">
                 <Link to="/faq" className="link-header-a">
                   FAQ
@@ -100,7 +101,7 @@ const Header = () => {
                 >
                   {curLang === "en" ? (
                     <>
-                      <Flag2 />
+                      <Flag10 />
                       <p className="dropdown-content-language-p">English</p>
                     </>
                   ) : (
@@ -133,7 +134,7 @@ const Header = () => {
                   }`}
                   onClick={() => changeLang("en")}
                 >
-                  <Flag2 />
+                  <Flag10 />
                   <p>English</p>
                 </div>
               </div>
@@ -164,7 +165,7 @@ const Header = () => {
                     {curLang === "en" ? "About" : "О нас"}
                   </Link>
                 </li>
-                <li className="link-header-li">
+                {/* <li className="link-header-li">
                   <Link to="/how_works" className="link-header-a">
                     {curLang === "en" ? "How it works" : "Как это работает"}
                   </Link>
@@ -173,7 +174,7 @@ const Header = () => {
                   <Link to="/where_works" className="link-header-a">
                     {curLang === "en" ? "Where we work" : "Где работаем"}
                   </Link>
-                </li>
+                </li> */}
                 <li className="link-header-li">
                   <Link to="/faq" className="link-header-a">
                     FAQ
@@ -197,7 +198,7 @@ const Header = () => {
                     >
                       {curLang === "en" ? (
                         <>
-                          <Flag2 />
+                          <Flag10 />
                           <p className="dropdown-content-language-p dropdown-content-language-p-2">
                             English
                           </p>
@@ -232,7 +233,7 @@ const Header = () => {
                       }`}
                       onClick={() => changeLang("en")}
                     >
-                      <Flag2 />
+                      <Flag10 />
                       <p>English</p>
                     </div>
                   </div>

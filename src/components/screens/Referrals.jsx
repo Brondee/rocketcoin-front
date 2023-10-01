@@ -4,6 +4,7 @@ import SideBar from "../shared/SideBar";
 import { useGetUserInfoQuery } from "../../store/user/userApiSlice";
 import ReferralItem from "../shared/ReferralItem";
 import { useSelector } from "react-redux";
+import RotationBanner from "../shared/RotationBanner";
 
 const Referrals = () => {
   const [referralCode, setRefferalCode] = useState("");
@@ -38,9 +39,27 @@ const Referrals = () => {
         <section className="content-lk">
           <SideBar />
           <div class="right-content-lk">
-            <h1 class="title-page-lk">
-              {curLang === "en" ? "Referrals" : "Рефералы"}
-            </h1>
+            <div className="page-title-ban-cont">
+              <h1 class="title-page-lk">
+                {curLang === "en" ? "Referrals" : "Рефералы"}
+              </h1>
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  datasid="382178"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                  dataframe="2259292"
+                />
+              </div>
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  datasid="382179"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                  dataframe="2259293"
+                />
+              </div>
+            </div>
             <div class="wrapper-page-lk">
               <div class="content-block-flex-lk-white">
                 <p class="text-referrals-little">

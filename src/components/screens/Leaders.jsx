@@ -4,6 +4,7 @@ import SideBar from "../shared/SideBar";
 import { useGetLeadersInfoQuery } from "../../store/leaders/leadersApiSlice";
 import LeaderItem from "../shared/LeaderItem";
 import { useSelector } from "react-redux";
+import RotationBanner from "../shared/RotationBanner";
 
 const Leaders = () => {
   const { data } = useGetLeadersInfoQuery();
@@ -16,9 +17,27 @@ const Leaders = () => {
         <section className="content-lk">
           <SideBar />
           <div class="right-content-lk">
-            <h1 class="title-page-lk">
-              {curLang === "en" ? "Leaderboard" : "Лидеры"}
-            </h1>
+            <div className="page-title-ban-cont">
+              <h1 class="title-page-lk">
+                {curLang === "en" ? "Leaderboard" : "Лидеры"}
+              </h1>
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  dataframe="2259517"
+                  datasid="382314"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                />
+              </div>
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  dataframe="2259518"
+                  datasid="382315"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                />
+              </div>
+            </div>
             <div class="wrapper-page-lk wrapper-page-lk-leaderboard">
               <div class="leaderboard-container">
                 <div class="leaderboard-container-block">
@@ -38,7 +57,7 @@ const Leaders = () => {
                           amount={ptcMonthCount}
                           currency={"ptc"}
                           place={index}
-                          rewards={[3000, 2000, 1000]}
+                          rewards={[60000, 30000, 15000]}
                         />
                       );
                     })}
@@ -61,7 +80,7 @@ const Leaders = () => {
                           amount={linksMonthCount}
                           currency={""}
                           place={index}
-                          rewards={[4000, 3000, 2100]}
+                          rewards={[100000, 50000, 25000]}
                         />
                       );
                     })}
@@ -84,7 +103,7 @@ const Leaders = () => {
                           amount={faucetMonthCount}
                           currency={""}
                           place={index}
-                          rewards={[1500, 1000, 500]}
+                          rewards={[60000, 30000, 15000]}
                         />
                       );
                     })}
@@ -107,7 +126,7 @@ const Leaders = () => {
                           amount={offerwallMonthCount}
                           currency={curLang === "en" ? "tokens" : "токенов"}
                           place={index}
-                          rewards={[4500, 3300, 1500]}
+                          rewards={[100000, 50000, 25000]}
                         />
                       );
                     })}
@@ -130,7 +149,7 @@ const Leaders = () => {
                           amount={expMonthCount}
                           currency={"exp"}
                           place={index}
-                          rewards={[2500, 1700, 1200]}
+                          rewards={[15000, 10000, 5000]}
                         />
                       );
                     })}

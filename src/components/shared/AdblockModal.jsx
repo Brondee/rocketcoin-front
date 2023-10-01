@@ -1,18 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useDetectAdBlock } from "adblock-detect-react";
 
 const AdblockModal = () => {
-  const adBlockDetected = useDetectAdBlock();
+  // const adBlockDetected = useDetectAdBlock();
 
-  const { curLang } = useSelector((state) => state.general);
+  const { curLang, isModalAdblockOpen } = useSelector((state) => state.general);
 
   const reloadPage = () => {
     window.location.reload();
   };
 
   return (
-    <div className={`adblock-modal ${adBlockDetected && "active"}`}>
+    <div className={`adblock-modal ${isModalAdblockOpen && "active"}`}>
       <div className="adblock-modal-inner">
         <h2>{curLang === "en" ? "AdBlock Detected!" : "AdBlock Обнаружен!"}</h2>
         <p>

@@ -40,7 +40,7 @@ const PtcItem = ({
     if (completed) {
       setIsActive(false);
       dispatch(setModalOpen({ type: "ptc", status: true }));
-      dispatch(setPtcRewards({ tokens, exp, ptcId: id }));
+      dispatch(setPtcRewards({ tokens, exp: 5, ptcId: id }));
       console.log("completed");
     } else {
       return <span className="count-down">{seconds}</span>;

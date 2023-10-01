@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { ReactComponent as Social1 } from "../../assets/img/social1.svg";
 import { ReactComponent as Social1Active } from "../../assets/img/social-active1.svg";
@@ -6,10 +6,28 @@ import { ReactComponent as Social2 } from "../../assets/img/social2.svg";
 import { ReactComponent as Social2Active } from "../../assets/img/social-active2.svg";
 import { ReactComponent as Social3 } from "../../assets/img/social3.svg";
 import { ReactComponent as Social3Active } from "../../assets/img/social-active3.svg";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setModalOpen } from "../../store/generalSlice";
 
 const Footer = () => {
   const { curLang } = useSelector((state) => state.general);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getThing = async () => {
+      try {
+        const resp = await fetch(
+          "//www.profitablecreativeformat.com/invoke.js"
+        );
+        console.log(resp);
+      } catch (err) {
+        dispatch(setModalOpen({ type: "adblock", status: true }));
+        console.log(err);
+      }
+    };
+    getThing();
+  }, [dispatch]);
 
   return (
     <>
@@ -42,7 +60,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <script src="../../assets/scripts/script.js"></script>
+        {/* <script src="../../assets/scripts/script.js"></script> */}
       </footer>
     </>
   );

@@ -97,6 +97,7 @@ const Ad = () => {
         if (ptcResp.data) {
           const resp = await reduceTokens({
             tokens: Math.round(Number(finalPrice)),
+            type: "invest",
           });
           if (resp.data) {
             setIsSuccess(true);
@@ -151,9 +152,25 @@ const Ad = () => {
         <section className="content-lk">
           <SideBar />
           <div class="right-content-lk">
-            <h1 class="title-page-lk">
-              {curLang === "en" ? "Advertisement" : "Реклама"}
-            </h1>
+            <div className="page-title-ban-cont">
+              <h1 class="title-page-lk">
+                {curLang === "en" ? "Advertisement" : "Реклама"}
+              </h1>
+              <div className="banner banner468 banner-profile">
+                <iframe
+                  title="promote"
+                  data-aa="2261587"
+                  src="//ad.a-ads.com/2261587?size=468x60"
+                ></iframe>
+              </div>
+              <div className="banner banner468 banner-profile">
+                <iframe
+                  title="promote"
+                  data-aa="2261588"
+                  src="//ad.a-ads.com/2261588?size=468x60"
+                ></iframe>
+              </div>
+            </div>
             <div class="wrapper-page-lk">
               <div class="promotion-container">
                 <div class="promotion-container-block">
@@ -254,27 +271,25 @@ const Ad = () => {
                             onChange={(e) => setViewsCount(e.target.value)}
                           >
                             <option value="5">
-                              5 {curLang === "en" ? "seconds" : "секунда"} - 30{" "}
+                              5 {curLang === "en" ? "seconds" : "секунда"} - 1{" "}
                               {curLang === "en"
                                 ? "tokens per view"
                                 : "токенов за просмотр"}
                             </option>
                             <option value="15">
-                              15 {curLang === "en" ? "seconds" : "секунда"} - 70{" "}
+                              15 {curLang === "en" ? "seconds" : "секунда"} - 3{" "}
                               {curLang === "en"
                                 ? "tokens per view"
                                 : "токенов за просмотр"}
                             </option>
                             <option value="30">
-                              30 {curLang === "en" ? "seconds" : "секунда"} -
-                              130{" "}
+                              30 {curLang === "en" ? "seconds" : "секунда"} - 8{" "}
                               {curLang === "en"
                                 ? "tokens per view"
                                 : "токенов за просмотр"}
                             </option>
                             <option value="60">
-                              60 {curLang === "en" ? "seconds" : "секунда"} -
-                              240{" "}
+                              60 {curLang === "en" ? "seconds" : "секунда"} - 16{" "}
                               {curLang === "en"
                                 ? "tokens per view"
                                 : "токенов за просмотр"}
@@ -286,26 +301,25 @@ const Ad = () => {
                             onChange={(e) => setViewsCount(e.target.value)}
                           >
                             <option value="5">
-                              5 {curLang === "en" ? "seconds" : "секунда"} - 25{" "}
+                              5 {curLang === "en" ? "seconds" : "секунда"} - 3{" "}
                               {curLang === "en"
                                 ? "tokens per view"
                                 : "токенов за просмотр"}
                             </option>
                             <option value="10">
-                              10 {curLang === "en" ? "seconds" : "секунда"} - 40{" "}
+                              10 {curLang === "en" ? "seconds" : "секунда"} - 6{" "}
                               {curLang === "en"
                                 ? "tokens per view"
                                 : "токенов за просмотр"}
                             </option>
                             <option value="15">
-                              15 {curLang === "en" ? "seconds" : "секунда"} - 60{" "}
+                              15 {curLang === "en" ? "seconds" : "секунда"} - 12{" "}
                               {curLang === "en"
                                 ? "tokens per view"
                                 : "токенов за просмотр"}
                             </option>
                             <option value="30">
-                              30 {curLang === "en" ? "seconds" : "секунда"} -
-                              110{" "}
+                              30 {curLang === "en" ? "seconds" : "секунда"} - 24{" "}
                               {curLang === "en"
                                 ? "tokens per view"
                                 : "токенов за просмотр"}

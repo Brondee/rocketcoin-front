@@ -49,7 +49,7 @@ const PtcIframe = () => {
       tokens: data?.tokensReward,
       type: "ptc",
     });
-    const levelUpResp = await levelUpUser({ exp: data?.expReward });
+    const levelUpResp = await levelUpUser({ exp: 5 });
     const claimedResp = await setClaimed({
       ptcId: Number(window.location.href.split("/")[4]),
       lastTaken: new Date().toLocaleString("en-US"),
@@ -97,6 +97,27 @@ const PtcIframe = () => {
         <a href="https://rocket-coin.online/ptc">
           <Logo />
         </a>
+        <div className="banner banner468 banner-ptc">
+          <iframe
+            title="promote"
+            data-aa="2256209"
+            src="//ad.a-ads.com/2256209?size=468x60"
+          ></iframe>
+        </div>
+        <div className="banner banner468 banner-ptc">
+          <iframe
+            title="promote"
+            data-aa="2256209"
+            src="//ad.a-ads.com/2256209?size=468x60"
+          ></iframe>
+        </div>
+        <div className="banner banner120 banner-withdraw-mid">
+          <iframe
+            title="banner"
+            data-aa="2256203"
+            src="//ad.a-ads.com/2256203?size=120x60"
+          ></iframe>
+        </div>
         <Countdown
           date={
             new Date().getTime() +
@@ -115,7 +136,29 @@ const PtcIframe = () => {
           className="ptc-iframe"
         ></iframe>
       </div>
-      <div className="ptc-bottom-container"></div>
+      <div className="ptc-bottom-container">
+        <div className="banner banner468 banner-ptc">
+          <iframe
+            title="promote"
+            data-aa="2256209"
+            src="//ad.a-ads.com/2256209?size=468x60"
+          ></iframe>
+        </div>
+        <div className="banner banner468 banner-ptc">
+          <iframe
+            title="promote"
+            data-aa="2256209"
+            src="//ad.a-ads.com/2256209?size=468x60"
+          ></iframe>
+        </div>
+        <div className="banner banner120 banner-withdraw-mid">
+          <iframe
+            title="banner"
+            data-aa="2256203"
+            src="//ad.a-ads.com/2256203?size=120x60"
+          ></iframe>
+        </div>
+      </div>
       <div className={`captcha-modal ${isModalOpen && "modal-active"}`}>
         <div className="captcha-modal-inner">
           <LoadCanvasTemplateNoReload />
@@ -131,6 +174,13 @@ const PtcIframe = () => {
           {error && (
             <p className="captcha-label-error">Значения не совпадают</p>
           )}
+          <div className="banner banner120 banner-ptc-modal">
+            <iframe
+              title="banner"
+              data-aa="2256203"
+              src="//ad.a-ads.com/2256203?size=120x60"
+            ></iframe>
+          </div>
           <button className="captcha-btn btn-task" onClick={submitCaptcha}>
             Подтвердить
           </button>

@@ -6,6 +6,8 @@ import generateLevelsArray from "../../utils/generateLevelsArray";
 import { useGetUserInfoQuery } from "../../store/user/userApiSlice";
 import { useSelector } from "react-redux";
 import AdblockModal from "../shared/AdblockModal";
+import FixedBanner from "../shared/FixedBanner";
+import Popunder from "../shared/Popunder";
 
 const Levels = () => {
   const { data } = useGetUserInfoQuery();
@@ -19,9 +21,25 @@ const Levels = () => {
         <section className="content-lk">
           <SideBar />
           <div class="right-content-lk">
-            <h1 class="title-page-lk">
-              {curLang === "en" ? "Levels" : "Уровни"}
-            </h1>
+            <div className="page-title-ban-cont">
+              <h1 class="title-page-lk">
+                {curLang === "en" ? "Levels" : "Уровни"}
+              </h1>
+              <div className="banner banner468 banner-profile">
+                <iframe
+                  title="promote"
+                  data-aa="2259528"
+                  src="//ad.a-ads.com/2259528?size=468x60"
+                ></iframe>
+              </div>
+              <div className="banner banner468 banner-profile">
+                <iframe
+                  title="promote"
+                  data-aa="2259529"
+                  src="//ad.a-ads.com/2259529?size=468x60"
+                ></iframe>
+              </div>
+            </div>
             <div class="wrapper-page-lk">
               <div class="content-block-flex-lk-white">
                 <div class="table-ref-container">
@@ -33,6 +51,7 @@ const Levels = () => {
                           ? "Reward - tokens"
                           : "Награда - токены"}
                       </th>
+
                       <th>
                         {curLang === "en"
                           ? "Earning bonus"
@@ -60,6 +79,8 @@ const Levels = () => {
           </div>
         </section>
         <AdblockModal />
+        <FixedBanner page="levels" />
+        <Popunder />
       </Layout>
     </main>
   );

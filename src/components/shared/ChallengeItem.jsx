@@ -117,34 +117,36 @@ const ChallengeItem = ({
   };
 
   return (
-    <div class="challenge-lk-content-block">
-      <p>{title}</p>
-      <div class="challenge-lk-content-block-buttons">
-        <button
-          class={`btn-gray-tokens__challenge ${
-            completed >= toComplete && !isDisabled && "btn-challenge-active"
-          }`}
-          onClick={getChallengeReward}
-        >
-          {isDisabled
-            ? curLang === "en"
-              ? "Claimed"
-              : "Собрано"
-            : curLang === "en"
-            ? "Claim"
-            : "Собрать"}
-        </button>
-        <div class="challenge-lk-content-block-buttons-right">
-          <button class="btn-purple-tokens__challenge">
-            {completed} / {toComplete}
+    <>
+      <div class="challenge-lk-content-block">
+        <p>{title}</p>
+        <div class="challenge-lk-content-block-buttons">
+          <button
+            class={`btn-gray-tokens__challenge ${
+              completed >= toComplete && !isDisabled && "btn-challenge-active"
+            }`}
+            onClick={getChallengeReward}
+          >
+            {isDisabled
+              ? curLang === "en"
+                ? "Claimed"
+                : "Собрано"
+              : curLang === "en"
+              ? "Claim"
+              : "Собрать"}
           </button>
-          <button class="btn-green-tokens__challenge">
-            {tokens} {curLang === "en" ? "tokens" : "токенов"}
-          </button>
-          <button class="btn-purple-tokens__challenge">{exp} exp</button>
+          <div class="challenge-lk-content-block-buttons-right">
+            <button class="btn-purple-tokens__challenge">
+              {completed} / {toComplete}
+            </button>
+            <button class="btn-green-tokens__challenge">
+              {tokens} {curLang === "en" ? "tokens" : "токенов"}
+            </button>
+            <button class="btn-purple-tokens__challenge">{exp} exp</button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

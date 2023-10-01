@@ -5,6 +5,8 @@ import { useGetTasksQuery } from "../../store/task/taskApiSlice";
 import TaskItem from "../shared/TaskItem";
 import { useSelector } from "react-redux";
 import AdblockModal from "../shared/AdblockModal";
+import RotationBanner from "../shared/RotationBanner";
+import FixedBanner from "../shared/FixedBanner";
 
 const Tasks = () => {
   const { data } = useGetTasksQuery();
@@ -17,9 +19,27 @@ const Tasks = () => {
         <section className="content-lk">
           <SideBar />
           <div className="right-content-lk">
-            <h1 className="title-page-lk">
-              {curLang === "en" ? "Tasks" : "Задания"}
-            </h1>
+            <div className="page-title-ban-cont">
+              <h1 className="title-page-lk">
+                {curLang === "en" ? "Tasks" : "Задания"}
+              </h1>
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  dataframe="2260453"
+                  datasid="382194"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                />
+              </div>
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  dataframe="2260454"
+                  datasid="382195"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                />
+              </div>
+            </div>
             <div className="wrapper-page-lk">
               <div className="content-block-flex-lk-white">
                 <div className="task-offers-content">
@@ -53,6 +73,7 @@ const Tasks = () => {
           </div>
         </section>
         <AdblockModal />
+        <FixedBanner page="tasks" />
       </Layout>
     </main>
   );

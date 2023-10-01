@@ -12,6 +12,7 @@ const initialState = {
   tokensBonusReward: 0,
   expBonusReward: 0,
   curLang: "en",
+  isModalAdblockOpen: false,
 };
 
 const generalSlice = createSlice({
@@ -30,6 +31,8 @@ const generalSlice = createSlice({
         state.isModalSentMailOpen = status;
       } else if (type === "ptc") {
         state.isModalPtcOpen = status;
+      } else if (type === "adblock") {
+        state.isModalAdblockOpen = status;
       }
     },
     setPtcRewards: (state, action) => {

@@ -1368,6 +1368,9 @@ header {
   background-color: #fff;
   position: fixed;
   border-top: 1px solid rgba(0, 16, 61, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 .count-down {
   padding: 9px 20px;
@@ -1601,6 +1604,7 @@ header {
   background: #ffffff;
   border-right: 1px solid rgba(0, 16, 61, 0.12);
   width: 107px;
+  z-index: 80;
 }
 .left-panel-info::-webkit-scrollbar {
   width: 0;
@@ -1645,8 +1649,12 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: darkgray;
+  background: none;
   margin: 30px 0;
+}
+.promotion-block.block300 iframe {
+  height: 250px;
+  border: none;
 }
 .promotion-blocks {
   display: flex;
@@ -1665,11 +1673,230 @@ header {
   position: relative;
   gap: 40px;
 }
+.contacts-content {
+  justify-content: center;
+}
 .right-content-lk {
   padding-top: 50px;
   padding-right: 100px;
+  width: 90%;
+}
+.contacts-content .right-content-lk {
+  width: 90%;
+  padding-right: 0;
+}
+
+.page-title-ban-cont {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.page-title-ban-cont h1 {
+  margin-bottom: 0;
+}
+.bottom-banners-cont {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+.faucet-banners-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.faucet-banners-bottom {
+  margin-top: 50px;
+}
+.withdraw-banners {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.banner {
+  position: absolute;
+}
+
+.banner iframe {
+  border: none;
+}
+.banner-ptc-modal {
+  position: relative;
+  margin-top: 20px;
+}
+.table-bonus {
+  position: relative;
+}
+.banner-bonus-mob {
+  display: none;
+}
+.banner-bonus {
+  position: absolute;
+  z-index: 2;
+  left: 40%;
+}
+.td-banners-mob {
+  display: none;
+}
+
+.banner468 iframe,
+.banner468 {
+  width: 468px;
+  height: 60px;
+}
+.banner125 iframe,
+.banner125 {
+  width: 125px;
+  height: 125px;
+}
+.banner300 {
+  width: 300px;
+  height: 250px;
+}
+.banner120 iframe {
+  width: 120px;
+  height: 60px;
+  background: none;
+  border: none;
+}
+.block-info-your-balance {
+  position: relative;
+}
+.banner-withdraw {
+  left: 20px;
+}
+.banner-withdraw-mid {
+  position: relative;
+}
+.banner-ptc {
+  position: relative;
+}
+.banner-faucet {
+  margin-left: 20px;
+
+  position: relative;
+}
+.banner-home {
+  top: -12%;
+  z-index: 10;
+}
+.banner-profile {
+  position: relative;
+  margin-left: 20px;
+}
+.banner-fixed {
+  width: 300px;
+  height: 270px;
+  position: fixed;
+  background: #000;
+  right: 0;
+  bottom: 0;
+  display: none;
+  z-index: 100;
+  border-radius: 10px;
+}
+.banner-fixed.active {
+  display: block;
+}
+.banner-fixed.active:after {
+  display: none;
+}
+.video-banner {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+.started {
+  top: 0 !important;
+}
+
+.cross-icon {
+  color: #000;
+  position: absolute;
+  left: 0px;
+  top: -25px;
+  cursor: pointer;
+}
+.btn-banners-home-cont {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+.banner-home-center {
+  position: relative;
+}
+.top-support-banners-cont {
+  display: flex;
+  align-items: center;
+}
+.banner-mob {
+  display: none;
+}
+.banner-support {
+  position: relative;
+  margin-left: 20px;
+}
+
+.banner-hidden {
+  display: none;
+}
+
+.support-title {
+  margin: 100px 0;
+}
+
+.challange-banners-cont {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.banners-cont-bottom {
+  margin-bottom: 0;
+  margin-top: 20px;
+}
+
+.percent-wallet {
+  width: 100%;
+  height: 5px;
+  background-color: #aeaeae;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+.percent-wallet-inner {
+  height: 5px;
+  background-color: #3e8bf3;
+  border-radius: 10px;
+}
+
+.level-block-cont {
+  position: relative;
+}
+.level-progress {
+  margin-top: 10px;
+  position: absolute;
   width: 100%;
 }
+.level-progress-bar {
+  width: 100%;
+  border-radius: 50px;
+  background-color: #aeaeae;
+  height: 12px;
+}
+.level-progress-inner {
+  height: 12px;
+  background-color: #3e8bf3;
+  border-radius: 50px;
+}
+.level-percentage {
+  font-size: 15px;
+  margin-top: 5px;
+}
+
 .wrapper-page-lk {
   width: 100%;
   padding: 32px;

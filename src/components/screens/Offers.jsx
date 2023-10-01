@@ -7,6 +7,8 @@ import { useGetRatingInfoQuery } from "../../store/rating/ratingApiSlice";
 import { useGetUserInfoQuery } from "../../store/user/userApiSlice";
 import { useSelector } from "react-redux";
 import AdblockModal from "../shared/AdblockModal";
+import RotationBanner from "../shared/RotationBanner";
+import FixedBanner from "../shared/FixedBanner";
 
 const Offers = () => {
   const response = useGetUserInfoQuery();
@@ -72,9 +74,27 @@ const Offers = () => {
         <section className="content-lk">
           <SideBar />
           <div className="right-content-lk">
-            <h1 className="title-page-lk">
-              {curLang === "en" ? "Offerwall" : "Офферы"}
-            </h1>
+            <div className="page-title-ban-cont">
+              <h1 className="title-page-lk">
+                {curLang === "en" ? "Offerwall" : "Офферы"}
+              </h1>
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  datasid="382183"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                  dataframe="2259296"
+                />
+              </div>
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  datasid="382184"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                  dataframe="2259297"
+                />
+              </div>
+            </div>
             <div className="wrapper-page-lk">
               <div className="content-block-flex-lk-white">
                 <div className="task-offers-content">
@@ -169,6 +189,7 @@ const Offers = () => {
           </div>
         </section>
         <AdblockModal />
+        <FixedBanner page="offers" />
       </Layout>
     </main>
   );

@@ -4,11 +4,14 @@ import {
   useAddUserTokensMutation,
   useGetUserInfoQuery,
   useIncrementCountMutation,
+  useLevelUpUserMutation,
   useUpdateUserInfoMutation,
 } from "../../store/user/userApiSlice";
 import generateCaptcha from "../../utils/generateCaptcha";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import RotationBanner from "../shared/RotationBanner";
+import FixedBanner from "../shared/FixedBanner";
 
 const FaucetClaim = () => {
   const [isCaptchaOpen, setIsCaptchaOpen] = useState(false);
@@ -25,6 +28,7 @@ const FaucetClaim = () => {
   const [updateUserInfo] = useUpdateUserInfoMutation();
   const [addUserTokens] = useAddUserTokensMutation();
   const [incrementCount] = useIncrementCountMutation();
+  const [levelUpUser] = useLevelUpUserMutation();
 
   const getInfo = useCallback(useGetUserInfoQuery, [
     captchaDisplayState,
@@ -68,9 +72,14 @@ const FaucetClaim = () => {
           type: "faucet",
         });
         const incrResp = await incrementCount({ type: "faucet" });
+        const expResp = await levelUpUser({ exp: 2 });
 
-        console.log(response, addTokensResp, incrResp);
-        if (response.data && incrResp.data && addTokensResp.data) {
+        if (
+          response.data &&
+          incrResp.data &&
+          addTokensResp.data &&
+          expResp.data
+        ) {
           window.location.reload();
         }
       } catch (err) {
@@ -80,14 +89,6 @@ const FaucetClaim = () => {
       console.log({ captchaInputState, captchaResultState });
     }
   };
-
-  // const checkDocumentFocus = () => {
-  //   if (document.hasFocus()) {
-  //     clockRef.current.start();
-  //   } else {
-  //     clockRef.current.pause();
-  //   }
-  // };
 
   const countDownFunc = ({ seconds, completed }) => {
     if (completed) {
@@ -104,10 +105,6 @@ const FaucetClaim = () => {
       </span>
     );
   };
-
-  // useEffect(() => {
-  //   setInterval(checkDocumentFocus, 500);
-  // }, []);
 
   useEffect(() => {
     const { captchaResultArray, captchaDisplayArray } = generateCaptcha();
@@ -127,77 +124,126 @@ const FaucetClaim = () => {
 
   return (
     <main className="faucet-claim-main">
-      <div className="faucet-claim-inner">
-        {isFaucetClaimed ? (
-          <>
-            <p className="faucet-claimed-text">
-              {curLang === "en"
-                ? "Faucet claimed! Please wait"
-                : "Faucet получен! Пожалуйста подождите"}
-            </p>
-            <Countdown
-              date={new Date(data?.faucetClaimed).getTime() + 1000 * 60 * 5}
-              renderer={countDownFuncSecond}
+      <div className="faucet-cont">
+        <div className="faucet-banners-top">
+          <div className="banner banner300 banner-faucet promotion-block block300">
+            <RotationBanner
+              width={300}
+              datasid="382274"
+              datakey="74f5fd8cb2210ae903b1c609be6726ea"
+              dataframe="2259506"
             />
-            <Link className="btn-lk-account btn-lk-account-2" to="/faucet">
-              {curLang === "en" ? "Home" : "На главную"}
-            </Link>
-          </>
-        ) : (
-          <>
-            <div
-              className={`faucet-claim-countdown ${isCaptchaOpen && "hidden"}`}
-            >
-              <Countdown
-                date={new Date().getTime() + 1000 * 10}
-                renderer={countDownFunc}
-                ref={clockRef}
-              />
-            </div>
-            <div className={`captcha ${isCaptchaOpen && "open"}`}>
-              <p className="task-faucet-content">
+          </div>
+          <div className="banner banner300 banner-faucet promotion-block block300">
+            <RotationBanner
+              width={300}
+              datasid="382275"
+              datakey="74f5fd8cb2210ae903b1c609be6726ea"
+              dataframe="2259507"
+            />
+          </div>
+          <div className="banner banner300 banner-faucet promotion-block block300">
+            <RotationBanner
+              width={300}
+              datasid="382276"
+              datakey="74f5fd8cb2210ae903b1c609be6726ea"
+              dataframe="2259508"
+            />
+          </div>
+        </div>
+        <div className="faucet-claim-inner">
+          {isFaucetClaimed ? (
+            <>
+              <p className="faucet-claimed-text">
                 {curLang === "en"
-                  ? "Select the numbers in the correct sequence:"
-                  : "Выделите цифры в правильной последовательности:"}{" "}
-                {captchaResultState.map((number) => {
-                  return <span key={number}>{number} </span>;
-                })}
+                  ? "Faucet claimed! Please wait"
+                  : "Faucet получен! Пожалуйста подождите"}
               </p>
-              <div className="numbers-content-faucet">
-                <div
-                  className={`faucet-number ${is1Hidden && "faucet-hidden"}`}
-                  onClick={() => {
-                    setCaptchaNumber(0);
-                  }}
-                >
-                  {captchaDisplayState[0]}
-                </div>
-                <div
-                  className={`faucet-number ${is2Hidden && "faucet-hidden"}`}
-                  onClick={() => {
-                    setCaptchaNumber(1);
-                  }}
-                >
-                  {captchaDisplayState[1]}
-                </div>
-                <div
-                  className={`faucet-number ${is3Hidden && "faucet-hidden"}`}
-                  onClick={() => {
-                    setCaptchaNumber(2);
-                  }}
-                >
-                  {captchaDisplayState[2]}
-                </div>
-              </div>
-              <button
-                className="btn-lk-account btn-lk-account-2"
-                onClick={submitCaptcha}
+              <Countdown
+                date={new Date(data?.faucetClaimed).getTime() + 1000 * 60 * 5}
+                renderer={countDownFuncSecond}
+              />
+              <Link className="btn-lk-account btn-lk-account-2" to="/faucet">
+                {curLang === "en" ? "Home" : "На главную"}
+              </Link>
+            </>
+          ) : (
+            <>
+              <div
+                className={`faucet-claim-countdown ${
+                  isCaptchaOpen && "hidden"
+                }`}
               >
-                {curLang === "en" ? "Check" : "Проверить капчу"}
-              </button>
-            </div>
-          </>
-        )}
+                <Countdown
+                  date={new Date().getTime() + 1000 * 10}
+                  renderer={countDownFunc}
+                  ref={clockRef}
+                />
+              </div>
+              <div className={`captcha ${isCaptchaOpen && "open"}`}>
+                <p className="task-faucet-content">
+                  {curLang === "en"
+                    ? "Select the numbers in the correct sequence:"
+                    : "Выделите цифры в правильной последовательности:"}{" "}
+                  {captchaResultState.map((number) => {
+                    return <span key={number}>{number} </span>;
+                  })}
+                </p>
+                <div className="numbers-content-faucet">
+                  <div
+                    className={`faucet-number ${is1Hidden && "faucet-hidden"}`}
+                    onClick={() => {
+                      setCaptchaNumber(0);
+                    }}
+                  >
+                    {captchaDisplayState[0]}
+                  </div>
+                  <div
+                    className={`faucet-number ${is2Hidden && "faucet-hidden"}`}
+                    onClick={() => {
+                      setCaptchaNumber(1);
+                    }}
+                  >
+                    {captchaDisplayState[1]}
+                  </div>
+                  <div
+                    className={`faucet-number ${is3Hidden && "faucet-hidden"}`}
+                    onClick={() => {
+                      setCaptchaNumber(2);
+                    }}
+                  >
+                    {captchaDisplayState[2]}
+                  </div>
+                </div>
+                <button
+                  className="btn-lk-account btn-lk-account-2"
+                  onClick={submitCaptcha}
+                >
+                  {curLang === "en" ? "Check" : "Проверить капчу"}
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+        <div className="faucet-banners-top faucet-banners-bottom">
+          <div className="banner banner468 banner-faucet">
+            <RotationBanner
+              width={468}
+              datasid="382277"
+              datakey="679f64fa36a4eb3544f2a556b9240afe"
+              dataframe="2259509"
+            />
+          </div>
+          <div className="banner banner468 banner-faucet">
+            <RotationBanner
+              width={468}
+              datasid="382278"
+              datakey="679f64fa36a4eb3544f2a556b9240afe"
+              dataframe="2259511"
+            />
+          </div>
+        </div>
+        <FixedBanner page="faucet_claim" />
       </div>
     </main>
   );

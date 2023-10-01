@@ -36,10 +36,12 @@ import BlogPage from "./components/screens/BlogPage";
 import BlogAdmin from "./components/screens/admin/BlogAdmin";
 import Clix from "./components/screens/applications/Clix";
 import FaucetClaim from "./components/screens/FaucetClaim";
+import Contacts from "./components/screens/Contacts";
 
 function App() {
   return (
     <Routes>
+      <Route path="/contacts" element={<Contacts />} />
       <Route path="/blog-page/:id" element={<BlogPage />} />
       <Route path="/admin_article" element={<BlogAdmin />} />
       <Route path="/blog" element={<Blog />} />

@@ -9,6 +9,8 @@ import {
   useGetUserInfoQuery,
   useReduceTokensMutation,
 } from "../../store/user/userApiSlice";
+import RotationBanner from "../shared/RotationBanner";
+import Popunder from "../shared/Popunder";
 
 const Withdraw = () => {
   const [userWallet, setUserWallet] = useState("");
@@ -19,6 +21,14 @@ const Withdraw = () => {
   const [walletError, setWalletError] = useState(false);
   const [tokensError, setTokensError] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  const [btcPercent, setBtcPercent] = useState(0);
+  const [trxPercent, setTrxPercent] = useState(0);
+  const [dogePercent, setDogePercent] = useState(0);
+  const [solPercent, setSolPercent] = useState(0);
+  const [usdtPercent, setUsdtPercent] = useState(0);
+  const [bnbPercent, setBnbPercent] = useState(0);
+  const [ltcPercent, setLtcPercent] = useState(0);
 
   const { curLang } = useSelector((state) => state.general);
   const [reduceTokens] = useReduceTokensMutation();
@@ -95,7 +105,10 @@ const Withdraw = () => {
         );
         console.log(sendPayment.data);
         if (sendPayment.data.status === 200) {
-          const resp = await reduceTokens({ tokens: tokensNumber });
+          const resp = await reduceTokens({
+            tokens: tokensNumber,
+            type: "withdraw",
+          });
           console.log(resp.data);
           setSuccess(true);
           setTimeout(() => {
@@ -177,27 +190,45 @@ const Withdraw = () => {
     ]);
   }, [tokensNumber]);
 
-  // useEffect(() => {
-  //   const req = async () => {
-  //     try {
-  //       let bodyFormData = new FormData();
-  //       bodyFormData.append(
-  //         "api_key",
-  //         "3a433c998fecf83ae928f86e494ef06cbb4aa066cf61c594873d9d2b86e67392"
-  //       );
-  //       bodyFormData.append("currency", "BTC");
-  //       const response = await axios.post(
-  //         "https://faucetpay.io/api/v1/getbalance",
-  //         bodyFormData,
-  //         { "Content-Type": "multipart/form-data" }
-  //       );
-  //       console.log(response.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   req();
-  // }, []);
+  useEffect(() => {
+    const reqBalance = async (name) => {
+      try {
+        let bodyFormData = new FormData();
+        bodyFormData.append(
+          "api_key",
+          "3a433c998fecf83ae928f86e494ef06cbb4aa066cf61c594873d9d2b86e67392"
+        );
+        bodyFormData.append("currency", name);
+        const response = await axios.post(
+          "https://faucetpay.io/api/v1/getbalance",
+          bodyFormData,
+          { "Content-Type": "multipart/form-data" }
+        );
+        // console.log(response.data);
+
+        return response.data.balance;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const walletReq = async () => {
+      const btcBalance = await reqBalance("BTC");
+      setBtcPercent((btcBalance * 100) / 100000);
+      const trxBalance = await reqBalance("TRX");
+      setTrxPercent((trxBalance * 100) / 30000000000);
+      const dogeBalance = await reqBalance("DOGE");
+      setDogePercent((dogeBalance * 100) / 50000000000);
+      const solBalance = await reqBalance("SOL");
+      setSolPercent((solBalance * 100) / 100000000);
+      const usdtBalance = await reqBalance("USDT");
+      setUsdtPercent((usdtBalance * 100) / 3000000000);
+      const bnbBalance = await reqBalance("BNB");
+      setBnbPercent((bnbBalance * 100) / 10000000);
+      const ltcBalance = await reqBalance("LTC");
+      setLtcPercent((ltcBalance * 100) / 40000000);
+    };
+    walletReq();
+  }, []);
 
   return (
     <main>
@@ -205,12 +236,38 @@ const Withdraw = () => {
         <section className="content-lk">
           <SideBar />
           <div class="right-content-lk">
-            <h1 class="title-page-lk">
-              {curLang === "en" ? "Withdraw" : "Вывод"}
-            </h1>
+            <div className="page-title-ban-cont">
+              <h1 class="title-page-lk">
+                {curLang === "en" ? "Withdraw" : "Вывод"}
+              </h1>
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  dataframe="2259512"
+                  datasid="382310"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                />
+              </div>
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  dataframe="2259513"
+                  datasid="382311"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                />
+              </div>
+            </div>
             <div class="wrapper-page-lk">
               <div class="content-block-flex-lk-white">
                 <div class="block-info-your-balance">
+                  <div className="banner banner468 banner-withdraw">
+                    <RotationBanner
+                      width={468}
+                      dataframe="2259514"
+                      datasid="382312"
+                      datakey="679f64fa36a4eb3544f2a556b9240afe"
+                    />
+                  </div>
                   <img src={walletLine} alt="" />
                   <div class="text-block-info-your-balance">
                     <p>
@@ -224,7 +281,24 @@ const Withdraw = () => {
                     </h2>
                   </div>
                 </div>
+
                 <div class="flex-info-your-wallet">
+                  <div className="withdraw-banners">
+                    <div className="banner banner120 banner-withdraw-mid">
+                      <iframe
+                        title="banner"
+                        data-aa="2259515"
+                        src="//ad.a-ads.com/2259515?size=120x60"
+                      ></iframe>
+                    </div>
+                    <div className="banner banner120 banner-withdraw-mid">
+                      <iframe
+                        title="banner"
+                        data-aa="2259516"
+                        src="//ad.a-ads.com/2259516?size=120x60"
+                      ></iframe>
+                    </div>
+                  </div>
                   <div class="block-info-your-wallet">
                     <p>{curLang === "en" ? "Your wallet" : "Ваш кошелёк"}</p>
                     <input
@@ -280,6 +354,13 @@ const Withdraw = () => {
                     <div class="text-flex-blocks-wallet-you-can">
                       <p>BTC - FaucetPay</p>
                       <h3>~{currencies[0]} BTC</h3>
+                      <div className="percent-wallet">
+                        <div
+                          className="percent-wallet-inner"
+                          style={{ width: btcPercent }}
+                        ></div>
+                      </div>
+                      {btcPercent.toFixed(1)} %
                     </div>
                   </div>
                   <div
@@ -292,6 +373,13 @@ const Withdraw = () => {
                     <div class="text-flex-blocks-wallet-you-can">
                       <p>Tron (TRX)</p>
                       <h3>~{currencies[1]} TRX</h3>
+                      <div className="percent-wallet">
+                        <div
+                          className="percent-wallet-inner"
+                          style={{ width: trxPercent }}
+                        ></div>
+                      </div>
+                      {trxPercent.toFixed(1)} %
                     </div>
                   </div>
                   <div
@@ -304,6 +392,13 @@ const Withdraw = () => {
                     <div class="text-flex-blocks-wallet-you-can">
                       <p>Dogecoin (DOGE)</p>
                       <h3>~{currencies[2]} DOGE</h3>
+                      <div className="percent-wallet">
+                        <div
+                          className="percent-wallet-inner"
+                          style={{ width: dogePercent }}
+                        ></div>
+                      </div>
+                      {dogePercent.toFixed(1)} %
                     </div>
                   </div>
                   <div
@@ -316,6 +411,13 @@ const Withdraw = () => {
                     <div class="text-flex-blocks-wallet-you-can">
                       <p>Solana (SOL)</p>
                       <h3>~{currencies[3]} SOL</h3>
+                      <div className="percent-wallet">
+                        <div
+                          className="percent-wallet-inner"
+                          style={{ width: solPercent }}
+                        ></div>
+                      </div>
+                      {solPercent.toFixed(1)} %
                     </div>
                   </div>
                   <div
@@ -328,6 +430,13 @@ const Withdraw = () => {
                     <div class="text-flex-blocks-wallet-you-can">
                       <p>Tether (USDT)</p>
                       <h3>~{(Number(tokensNumber) / 33333).toFixed(5)} USDT</h3>
+                      <div className="percent-wallet">
+                        <div
+                          className="percent-wallet-inner"
+                          style={{ width: usdtPercent }}
+                        ></div>
+                      </div>
+                      {usdtPercent.toFixed(1)} %
                     </div>
                   </div>
                   <div
@@ -340,6 +449,13 @@ const Withdraw = () => {
                     <div class="text-flex-blocks-wallet-you-can">
                       <p>BNB</p>
                       <h3>~{currencies[5]} BNB</h3>
+                      <div className="percent-wallet">
+                        <div
+                          className="percent-wallet-inner"
+                          style={{ width: bnbPercent }}
+                        ></div>
+                      </div>
+                      {bnbPercent.toFixed(1)} %
                     </div>
                   </div>
                   <div
@@ -352,6 +468,13 @@ const Withdraw = () => {
                     <div class="text-flex-blocks-wallet-you-can">
                       <p>Litecoin (LTC)</p>
                       <h3>~{currencies[4]} LTC</h3>
+                      <div className="percent-wallet">
+                        <div
+                          className="percent-wallet-inner"
+                          style={{ width: ltcPercent }}
+                        ></div>
+                      </div>
+                      {ltcPercent.toFixed(1)} %
                     </div>
                   </div>
                 </div>
@@ -380,6 +503,7 @@ const Withdraw = () => {
             </div>
           </div>
         </section>
+        <Popunder />
       </Layout>
     </main>
   );

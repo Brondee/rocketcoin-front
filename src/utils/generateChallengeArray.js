@@ -2,20 +2,20 @@ const generateChallengeArray = (data, lang) => {
   let challengeArray = [
     {
       id: 0,
-      title: lang === "en" ? "Complete 30 links" : "Завершить 30 ссылок",
+      title: lang === "en" ? "Complete 80 links" : "Завершить 80 ссылок",
       completed: data?.linksDayCount,
-      toComplete: 30,
-      tokens: 10000,
-      exp: 100,
+      toComplete: 80,
+      tokens: 600,
+      exp: 40,
       isDisabled: data?.linksChallengesClaimed >= 4 ? true : false,
     },
     {
       id: 1,
-      title: lang === "en" ? "Complete 20 links" : "Завершить 20 ссылок",
+      title: lang === "en" ? "Complete 50 links" : "Завершить 50 ссылок",
       completed: data?.linksDayCount,
-      toComplete: 20,
-      tokens: 8000,
-      exp: 80,
+      toComplete: 50,
+      tokens: 300,
+      exp: 25,
       isDisabled: data?.linksChallengesClaimed >= 3 ? true : false,
     },
     {
@@ -23,17 +23,17 @@ const generateChallengeArray = (data, lang) => {
       title: lang === "en" ? "Complete 10 links" : "Завершить 10 ссылок",
       completed: data?.linksDayCount,
       toComplete: 10,
-      tokens: 5000,
-      exp: 50,
+      tokens: 33,
+      exp: 10,
       isDisabled: data?.linksChallengesClaimed >= 2 ? true : false,
     },
     {
       id: 3,
-      title: lang === "en" ? "Complete 5 links" : "Завершить 5 ссылок",
+      title: lang === "en" ? "Complete 25 links" : "Завершить 25 ссылок",
       completed: data?.linksDayCount,
-      toComplete: 5,
-      tokens: 3000,
-      exp: 40,
+      toComplete: 25,
+      tokens: 66,
+      exp: 15,
       isDisabled: data?.linksChallengesClaimed >= 1 ? true : false,
     },
     {
@@ -41,8 +41,8 @@ const generateChallengeArray = (data, lang) => {
       title: lang === "en" ? "Complete 100 faucet" : "Завершить 100 faucet",
       completed: data?.faucetDayCount,
       toComplete: 100,
-      tokens: 14000,
-      exp: 100,
+      tokens: 50,
+      exp: 25,
       isDisabled: data?.faucetChallengesClaimed >= 4 ? true : false,
     },
     {
@@ -50,8 +50,8 @@ const generateChallengeArray = (data, lang) => {
       title: lang === "en" ? "Complete 50 faucet" : "Завершить 50 faucet",
       completed: data?.faucetDayCount,
       toComplete: 50,
-      tokens: 10000,
-      exp: 80,
+      tokens: 25,
+      exp: 15,
       isDisabled: data?.faucetChallengesClaimed >= 3 ? true : false,
     },
     {
@@ -59,8 +59,8 @@ const generateChallengeArray = (data, lang) => {
       title: lang === "en" ? "Complete 30 faucet" : "Завершить 30 faucet",
       completed: data?.faucetDayCount,
       toComplete: 30,
-      tokens: 8000,
-      exp: 60,
+      tokens: 15,
+      exp: 10,
       isDisabled: data?.faucetChallengesClaimed >= 2 ? true : false,
     },
     {
@@ -68,8 +68,8 @@ const generateChallengeArray = (data, lang) => {
       title: lang === "en" ? "Complete 10 faucet" : "Завершить 10 faucet",
       completed: data?.faucetDayCount,
       toComplete: 10,
-      tokens: 5000,
-      exp: 50,
+      tokens: 5,
+      exp: 5,
       isDisabled: data?.faucetChallengesClaimed >= 1 ? true : false,
     },
     {
@@ -77,8 +77,8 @@ const generateChallengeArray = (data, lang) => {
       title: lang === "en" ? "Complete 50 PTC" : "Завершить 50 PTC",
       completed: data?.ptcDayCount,
       toComplete: 50,
-      tokens: 15000,
-      exp: 100,
+      tokens: 50,
+      exp: 15,
       isDisabled: data?.ptcChallengesClaimed >= 3 ? true : false,
     },
     {
@@ -86,8 +86,8 @@ const generateChallengeArray = (data, lang) => {
       title: lang === "en" ? "Complete 25 PTC" : "Завершить 25 PTC",
       completed: data?.ptcDayCount,
       toComplete: 25,
-      tokens: 10000,
-      exp: 70,
+      tokens: 25,
+      exp: 10,
       isDisabled: data?.ptcChallengesClaimed >= 2 ? true : false,
     },
     {
@@ -95,8 +95,8 @@ const generateChallengeArray = (data, lang) => {
       title: lang === "en" ? "Complete 10 PTC" : "Завершить 10 PTC",
       completed: data?.ptcDayCount,
       toComplete: 10,
-      tokens: 5000,
-      exp: 40,
+      tokens: 10,
+      exp: 3,
       isDisabled: data?.ptcChallengesClaimed >= 1 ? true : false,
     },
     {
@@ -105,8 +105,8 @@ const generateChallengeArray = (data, lang) => {
         lang === "en" ? "3000 tokens with Offers" : "3000 токенов на Офферах",
       completed: data?.offerwallDayCount,
       toComplete: 3000,
-      tokens: 6000,
-      exp: 80,
+      tokens: 150,
+      exp: 100,
       isDisabled: data?.offerwallChallengesClaimed >= 3 ? true : false,
     },
     {
@@ -115,8 +115,8 @@ const generateChallengeArray = (data, lang) => {
         lang === "en" ? "2000 tokens with Offers" : "2000 токенов на Офферах",
       completed: data?.offerwallDayCount,
       toComplete: 2000,
-      tokens: 4000,
-      exp: 70,
+      tokens: 45,
+      exp: 30,
       isDisabled: data?.offerwallChallengesClaimed >= 2 ? true : false,
     },
     {
@@ -125,12 +125,17 @@ const generateChallengeArray = (data, lang) => {
         lang === "en" ? "500 tokens with Offers" : "500 токенов на Офферах",
       completed: data?.offerwallDayCount,
       toComplete: 500,
-      tokens: 2000,
-      exp: 50,
+      tokens: 15,
+      exp: 10,
       isDisabled: data?.offerwallChallengesClaimed >= 1 ? true : false,
     },
   ];
 
-  return challengeArray;
+  // return challengeArray;
+  return {
+    firstArray: challengeArray.slice(0, 2),
+    secondArray: challengeArray.slice(2, 4),
+    thirdArray: challengeArray.slice(4, 14),
+  };
 };
 export default generateChallengeArray;

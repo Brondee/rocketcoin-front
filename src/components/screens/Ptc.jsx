@@ -18,6 +18,8 @@ import {
 } from "../../store/user/userApiSlice";
 import { useSelector } from "react-redux";
 import AdblockModal from "../shared/AdblockModal";
+import FixedBanner from "../shared/FixedBanner";
+import Popunder from "../shared/Popunder";
 
 const Ptc = () => {
   const [isFirstActive, setIsFirstActive] = useState(true);
@@ -100,7 +102,23 @@ const Ptc = () => {
         <section className="content-lk">
           <SideBar />
           <div class="right-content-lk">
-            <h1 class="title-page-lk">PTC</h1>
+            <div className="page-title-ban-cont">
+              <h1 class="title-page-lk">PTC</h1>
+              <div className="banner banner468 banner-profile">
+                <iframe
+                  title="promote"
+                  data-aa="2256209"
+                  src="//ad.a-ads.com/2256209?size=468x60"
+                ></iframe>
+              </div>
+              <div className="banner banner468 banner-profile">
+                <iframe
+                  title="promote"
+                  data-aa="2256209"
+                  src="//ad.a-ads.com/2256209?size=468x60"
+                ></iframe>
+              </div>
+            </div>
             <div class="wrapper-page-lk">
               <div class="filters-offers">
                 <div
@@ -114,6 +132,20 @@ const Ptc = () => {
                   onClick={() => changeActive("second")}
                 >
                   Iframe
+                </div>
+                <div className="banner banner120 banner-profile">
+                  <iframe
+                    title="promote"
+                    data-aa="2256203"
+                    src="//ad.a-ads.com/2256203?size=120x60"
+                  ></iframe>
+                </div>
+                <div className="banner banner468 banner-profile">
+                  <iframe
+                    title="promote"
+                    data-aa="2256209"
+                    src="//ad.a-ads.com/2256209?size=468x60"
+                  ></iframe>
                 </div>
               </div>
               <div class="challenge-lk-content">
@@ -175,6 +207,13 @@ const Ptc = () => {
                   : "Значения не совпадают"}
               </p>
             )}
+            <div className="banner banner120 banner-ptc-modal">
+              <iframe
+                title="banner"
+                data-aa="2256203"
+                src="//ad.a-ads.com/2256203?size=120x60"
+              ></iframe>
+            </div>
             <button className="captcha-btn btn-task" onClick={submitCaptcha}>
               {isSuccess
                 ? curLang === "en"
@@ -187,6 +226,8 @@ const Ptc = () => {
           </div>
         </div>
         <AdblockModal />
+        <FixedBanner page="ptc" />
+        <Popunder />
       </Layout>
     </main>
   );

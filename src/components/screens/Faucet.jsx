@@ -7,6 +7,9 @@ import Countdown from "react-countdown";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import AdblockModal from "../shared/AdblockModal";
+import RotationBanner from "../shared/RotationBanner";
+import FixedBanner from "../shared/FixedBanner";
+import Popunder from "../shared/Popunder";
 
 const Faucet = () => {
   const [isFaucetClaimed, setIsFaucetClaimed] = useState(false);
@@ -44,7 +47,26 @@ const Faucet = () => {
         <section className="content-lk">
           <SideBar />
           <div className="right-content-lk">
-            <h1 className="title-page-lk">Faucet</h1>
+            <div className="page-title-ban-cont">
+              <h1 className="title-page-lk">Faucet</h1>
+
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  dataframe="2259499"
+                  datasid="382267"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                />
+              </div>
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  dataframe="2259500"
+                  datasid="382268"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                />
+              </div>
+            </div>
             <div className="wrapper-page-lk">
               <div className="content-block-flex-lk-white">
                 <div className="faucet-title-content">
@@ -55,6 +77,13 @@ const Faucet = () => {
                           ? "Faucet claimed! Please wait"
                           : "Faucet получен! Пожалуйста подождите"}
                       </p>
+                      <div className="banner banner120 banner-faucet">
+                        <iframe
+                          title="banner"
+                          data-aa="2256203"
+                          src="//ad.a-ads.com/2256203?size=120x60"
+                        ></iframe>
+                      </div>
                       <Countdown
                         date={
                           new Date(data?.faucetClaimed).getTime() +
@@ -64,12 +93,29 @@ const Faucet = () => {
                       />
                     </>
                   ) : (
-                    <p>
-                      {curLang === "en"
-                        ? "Click to claim Faucet"
-                        : "Кликните, чтобы получить Faucet"}
-                    </p>
+                    <>
+                      <p>
+                        {curLang === "en"
+                          ? "Click to claim Faucet"
+                          : "Кликните, чтобы получить Faucet"}
+                      </p>
+                      <div className="banner banner120 banner-faucet">
+                        <iframe
+                          title="faucet banner"
+                          data-aa="2259501"
+                          src="//ad.a-ads.com/2259501?size=120x60"
+                        ></iframe>
+                      </div>
+                    </>
                   )}
+
+                  <div className="banner banner120 banner-faucet">
+                    <iframe
+                      title="faucet banner"
+                      data-aa="2259502"
+                      src="//ad.a-ads.com/2259502?size=120x60"
+                    ></iframe>
+                  </div>
                   <div className="right-btns-content-task">
                     <a href="#!" className="btn-green-task">
                       150 {curLang === "en" ? "tokens" : "токены"}
@@ -97,14 +143,58 @@ const Faucet = () => {
                 )}
               </div>
               <div className="promotion-blocks">
-                <div className="promotion-block">Реклама</div>
-                <div className="promotion-block">Реклама</div>
-                <div className="promotion-block">Реклама</div>
+                <div className="promotion-block block300">
+                  <RotationBanner
+                    width={300}
+                    datasid="382271"
+                    datakey="74f5fd8cb2210ae903b1c609be6726ea"
+                    dataframe="2259503"
+                  />
+                </div>
+                <div className="promotion-block block300">
+                  <RotationBanner
+                    width={300}
+                    datasid="382272"
+                    datakey="74f5fd8cb2210ae903b1c609be6726ea"
+                    dataframe="2259504"
+                  />
+                </div>
+                <div className="promotion-block block300">
+                  <RotationBanner
+                    width={300}
+                    datasid="382273"
+                    datakey="74f5fd8cb2210ae903b1c609be6726ea"
+                    dataframe="2259505"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="bottom-banners-cont">
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  dataframe="2260884"
+                  datasid="382269"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                />
+              </div>
+              <div className="banner banner468 banner-profile">
+                <script type="text/javascript">alert("peppla")</script>
+              </div>
+              <div className="banner banner468 banner-profile">
+                <RotationBanner
+                  width={468}
+                  dataframe="2260885"
+                  datasid="382270"
+                  datakey="679f64fa36a4eb3544f2a556b9240afe"
+                />
               </div>
             </div>
           </div>
         </section>
         <AdblockModal />
+        <FixedBanner page="faucet" />
+        <Popunder />
       </Layout>
     </main>
   );

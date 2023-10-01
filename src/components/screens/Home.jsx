@@ -26,6 +26,7 @@ import social3 from "../../assets/img/social3.svg";
 import social3Active3 from "../../assets/img/social-active3.svg";
 import bitcoinRefresh from "../../assets/bitcoin-refresh.svg";
 import AccordionItem from "../shared/AccordionItem";
+import RotationBanner from "../shared/RotationBanner";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ const Home = () => {
   const [pwdNotMatch, setPwdNotMatch] = useState(false);
   const [isTickActive, setIsTickActive] = useState(false);
   const [tickError, setTickError] = useState(false);
+  const [ipError, setIpError] = useState(false);
   const [crIncorrect, setCrIncorrect] = useState(false);
   const [cantFindUser, setCantFindUser] = useState(false);
 
@@ -293,6 +295,9 @@ const Home = () => {
       setTickError(true);
       console.log("tick not active error");
     } else {
+      const res = await fetch("https://geolocation-db.com/json/");
+      const data = await res.json();
+      console.log(data.IPv4);
       try {
         const response = await signup({
           email,
@@ -300,7 +305,9 @@ const Home = () => {
           name,
           password,
           promocode: code ? code : "",
+          registrationIp: data.IPv4,
         });
+        console.log(response);
         if (response.error || !response.data) {
           const errMessage = response.error.data.message;
           if (errMessage === "Credentials taken in email") {
@@ -309,6 +316,8 @@ const Home = () => {
           } else if (errMessage === "Credentials taken in login") {
             setLoginError(true);
             setLoginTakenError(true);
+          } else if (errMessage === "ip error") {
+            setIpError(true);
           }
           console.log(errMessage);
         } else {
@@ -330,8 +339,6 @@ const Home = () => {
     }
   };
 
-  console.log(window.location.href.split("?code=")[1]);
-
   return (
     <div>
       <Layout title="Rocketcoin - Главная">
@@ -340,6 +347,14 @@ const Home = () => {
             <div className="main-section-container__main">
               <div className="main-section-container-left__main">
                 <div className="main-section-container-left-content__main">
+                  <div className="banner banner468 banner-home">
+                    <RotationBanner
+                      width={468}
+                      datasid="382172"
+                      datakey="679f64fa36a4eb3544f2a556b9240afe"
+                      dataframe="2259285"
+                    />
+                  </div>
                   <img
                     src={logoRocketcoin}
                     alt=""
@@ -366,16 +381,29 @@ const Home = () => {
                       <div className="offers-main-container-block-text">
                         <h3>{curLang === "en" ? "EARNERS" : "Заработок"}</h3>
                         <p>
-                          2,5 satoshi evert 5 mins, Affiliate program: 50% from
+                          2,5 satoshi every 5 mins, Affiliate program: 50% from
                           you referrals.
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
-                <a href="#!" className="learn-more-btn">
-                  {curLang === "en" ? "More" : "Узнать больше"}
-                </a>
+                <div className="btn-banners-home-cont">
+                  <div className="banner banner120 banner-home-center">
+                    <iframe
+                      title="home banner"
+                      data-aa="2259286"
+                      src="//ad.a-ads.com/2259286?size=120x60"
+                    ></iframe>
+                  </div>
+                  <div className="banner banner120 banner-home-center">
+                    <iframe
+                      title="home banner"
+                      data-aa="2259287"
+                      src="//ad.a-ads.com/2259287?size=120x60"
+                    ></iframe>
+                  </div>
+                </div>
               </div>
               <div className="main-section-container-right__main">
                 <img src={bgMain} alt="" className="bg-main-sign-in" />
@@ -890,6 +918,13 @@ const Home = () => {
                     {curLang === "en"
                       ? "You must agree with Privacy policy"
                       : "Подтвердите согласие с Privacy policy"}
+                  </span>
+                )}
+                {ipError && (
+                  <span className="label-error">
+                    {curLang === "en"
+                      ? "An account with such IP has been already created"
+                      : "Аккаунт с таким IP уже был зарегистрирован"}
                   </span>
                 )}
               </label>
